@@ -14,7 +14,7 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: black;
+    /* background-color: black; */
     background-image: url('/img/background.jpg');
 }
 
@@ -26,14 +26,36 @@ body {
     width: 96px;
     height: 96px;
     background-image: url('/img/spaceship.png');
-    animation: spaceship-move .2s steps(8) infinite;
+    animation: spaceship-animate .2s steps(8) infinite;
 }
 
-@keyframes spaceship-move {
+@keyframes spaceship-animate {
     from {
         background-position-x: 0px;
     }
     to {
         background-position-x: 768px;
+    }
+}
+
+.falcon {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 64px;
+    height: 64px;
+    background-image: url('/img/css_sprites.png');
+    animation: falcon-animate .2s steps(5) infinite;
+
+}
+
+@keyframes falcon-animate {
+    from {
+        background-position-x: 0px;
+    }
+
+    to {
+        background-position-x: 320px;
     }
 }
