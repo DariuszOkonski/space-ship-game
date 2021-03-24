@@ -1,3 +1,37 @@
+# RULES
+1. SPACESHIP
+- size 96x96
+- moving right left
+- small missle damage 1 - unlimited, 12x12
+
+ADDITIONAL
+- adding special icons
+- large missle damage 3 - limit to 20, size 32x32
+- bonuses falling from top same as enemies, can catch and increase weapons or lives or speed, size 32x32
+- special weapons limited by time - shot 3 small missles at once
+- speed power up limited by time
+
+-- ??? enemies die in large missle explosion range
+-- ??? various weapons
+
+
+2.ENEMIES
+- enemies show up every 3sec
+- Types of enemies:
+	1. Falcon - 1 live, size 64x64, speed - fastest, time x 1,
+	2. Hawk - 3, size 96x96, speed - medium, time x 2,
+	3. Apache - 5, size 128x128, speed - slow, shooting small missiles every 5sec, hitting power 1, time x 3
+
+
+3.GENERAL
+- loosing live when enemy touch bottom of the screen
+- loosing live when hit by missile
+- when no lives end game
+- each hit enemy increase points:
+	falcon + 1
+	hawk + 3
+	apache + 5
+
 # Freestyle JavaScript Game
 
 ## Story
