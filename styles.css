@@ -102,3 +102,25 @@ body {
         background-position-x: 1152px;
     }
 }
+
+
+.missile-rocket {
+    position: absolute;
+    bottom: 50px;
+    left: 30%;
+    
+    width: 80px;
+    height: 80px;
+    background-image: url('/img/missile-rocket-80.png');
+    animation: missile-rocket-animate var(--animation-time) steps(5) infinite;
+}
+
+
+@keyframes missile-rocket-animate {
+    from {
+        background-position-x: 0px;  
+    }
+    to {
+        background-position-x: 400px;
+    }
+}
