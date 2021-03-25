@@ -1,4 +1,7 @@
-:root{--animation-time: 0.2s;}
+:root{
+    --animation-time: 0.2s;
+    --explosion-time: 1s;
+}
 
 *, *::after, *::before {
     margin: 0;
@@ -151,13 +154,13 @@ body {
 
 .spaceship-explosion {
     position: absolute;
-    bottom: 0px;
+    bottom: 100px;
     left: 50%;
     
     width: 96px;
     height: 96px;
     background-image: url('/img/spaceship-explosion.png');
-    animation: spaceship-explosion-animate var(--animation-time) steps(17) infinite;
+    animation: spaceship-explosion-animate var(--explosion-time) steps(17) infinite;
 }
 
 @keyframes spaceship-explosion-animate {
@@ -177,7 +180,7 @@ body {
     width: 64px;
     height: 64px;
     background-image: url('/img/falcon-explosion.png');
-    animation: falcon-explosion-animate var(--animation-time) steps(5) infinite;
+    animation: falcon-explosion-animate var(--explosion-time) steps(5) infinite;
 
 }
 
@@ -199,7 +202,7 @@ body {
     width: 96px;
     height: 96px;
     background-image: url('img/hawk-explosion.png');
-    animation: hawk-explosion-animate var(--animation-time) steps(7) infinite;
+    animation: hawk-explosion-animate var(--explosion-time) steps(7) infinite;
 }   
 
 @keyframes hawk-explosion-animate {
@@ -219,7 +222,7 @@ body {
     width: 128px;
     height: 128px;
     background-image: url('/img/destroyer-explosion.png');
-    animation: destroyer-explosion-animate var(--animation-time) steps(17) infinite;
+    animation: destroyer-explosion-animate var(--explosion-time) steps(17) infinite;
 }
 
 @keyframes destroyer-explosion-animate {
@@ -241,7 +244,7 @@ body {
     width: 40px;
     height: 40px;
     background-image: url('/img/missile-explosion.png');
-    animation: missile-explosion-animate var(--animation-time) steps(6) infinite;
+    animation: missile-explosion-animate var(--explosion-time) steps(6) infinite;
 }
 
 
@@ -263,7 +266,7 @@ body {
     width: 128px;
     height: 128px;
     background-image: url('/img/missile-rocket-explosion.png');
-    animation: missile-rocket-explosion-animate var(--animation-time) steps(10) infinite;
+    animation: missile-rocket-explosion-animate var(--explosion-time) steps(10) infinite;
 }
 
 
