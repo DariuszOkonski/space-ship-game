@@ -104,6 +104,28 @@ body {
 }
 
 
+.missile {
+    position: absolute;
+    bottom: 50px;
+    left: 70%;
+    
+    width: 40px;
+    height: 40px;
+    background-image: url('/img/missile-paint.png');
+    animation: missile-animate var(--animation-time) steps(2) infinite;
+}
+
+
+@keyframes missile-animate {
+    from {
+        background-position-x: 0px;  
+    }
+    to {
+        background-position-x: 80px;
+    }
+}
+
+
 .missile-rocket {
     position: absolute;
     bottom: 50px;
@@ -117,6 +139,135 @@ body {
 
 
 @keyframes missile-rocket-animate {
+    from {
+        background-position-x: 0px;  
+    }
+    to {
+        background-position-x: 400px;
+    }
+}
+
+
+
+.spaceship-explosion {
+    position: absolute;
+    bottom: 200px;
+    left: 50%;
+    
+    width: 96px;
+    height: 96px;
+    background-image: url('/img/spaceship-explosion.png');
+    animation: spaceship-explosion-animate var(--animation-time) steps(8) infinite;
+}
+
+@keyframes spaceship-explosion-animate {
+    from {
+        background-position-x: 0px;
+    }
+    to {
+        background-position-x: 768px;
+    }
+}
+
+.falcon-explosion {
+    position: absolute;
+    top: 200px;
+    left: 0;
+
+    width: 64px;
+    height: 64px;
+    background-image: url('/img/falcon-explosion.png');
+    animation: falcon-explosion-animate var(--animation-time) steps(5) infinite;
+
+}
+
+@keyframes falcon-explosion-animate {
+    from {
+        background-position-x: 0px;
+    }
+
+    to {
+        background-position-x: 320px;
+    }
+}
+
+.hawk-explosion {
+    position: absolute;
+    top: 200px;
+    left:70%;
+
+    width: 96px;
+    height: 96px;
+    background-image: url('img/hawk-explosion.png');
+    animation: hawk-explosion-animate var(--animation-time) steps(7) infinite;
+}   
+
+@keyframes hawk-explosion-animate {
+    from {
+        background-position-x: 0px;
+    }
+    to {
+        background-position-x: 672px;
+    }
+}
+
+.destroyer-explosion {
+    position: absolute;
+    top: 200px;
+    left: 30%;
+    
+    width: 128px;
+    height: 128px;
+    background-image: url('/img/destroyer-explosion.png');
+    animation: destroyer-explosion-animate var(--animation-time) steps(9) infinite;
+}
+
+@keyframes destroyer-explosion-animate {
+    from {
+        background-position-x: 0px;
+    }
+
+    to {
+        background-position-x: 1152px;
+    }
+}
+
+
+.missile-explosion {
+    position: absolute;
+    bottom: 250px;
+    left: 70%;
+    
+    width: 40px;
+    height: 40px;
+    background-image: url('/img/missile-paint-explosion.png');
+    animation: missile-explosion-animate var(--animation-time) steps(2) infinite;
+}
+
+
+@keyframes missile-explosion-animate {
+    from {
+        background-position-x: 0px;  
+    }
+    to {
+        background-position-x: 80px;
+    }
+}
+
+
+.missile-rocket-explosion {
+    position: absolute;
+    bottom: 250px;
+    left: 30%;
+    
+    width: 80px;
+    height: 80px;
+    background-image: url('/img/missile-rocket-80-explosion.png');
+    animation: missile-rocket-explosion-animate var(--animation-time) steps(5) infinite;
+}
+
+
+@keyframes missile-rocket-explosion-animate {
     from {
         background-position-x: 0px;  
     }
