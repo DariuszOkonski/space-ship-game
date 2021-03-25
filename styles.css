@@ -151,13 +151,13 @@ body {
 
 .spaceship-explosion {
     position: absolute;
-    bottom: 200px;
+    bottom: 0px;
     left: 50%;
     
     width: 96px;
     height: 96px;
     background-image: url('/img/spaceship-explosion.png');
-    animation: spaceship-explosion-animate var(--animation-time) steps(8) infinite;
+    animation: spaceship-explosion-animate var(--animation-time) steps(17) infinite;
 }
 
 @keyframes spaceship-explosion-animate {
@@ -165,7 +165,7 @@ body {
         background-position-x: 0px;
     }
     to {
-        background-position-x: 768px;
+        background-position-x: -1632px;
     }
 }
 
@@ -207,7 +207,7 @@ body {
         background-position-x: 0px;
     }
     to {
-        background-position-x: 672px;
+        background-position-x: -672px;
     }
 }
 
@@ -219,7 +219,7 @@ body {
     width: 128px;
     height: 128px;
     background-image: url('/img/destroyer-explosion.png');
-    animation: destroyer-explosion-animate var(--animation-time) steps(9) infinite;
+    animation: destroyer-explosion-animate var(--animation-time) steps(17) infinite;
 }
 
 @keyframes destroyer-explosion-animate {
@@ -228,7 +228,7 @@ body {
     }
 
     to {
-        background-position-x: 1152px;
+        background-position-x: -2176px;
     }
 }
 
@@ -240,8 +240,8 @@ body {
     
     width: 40px;
     height: 40px;
-    background-image: url('/img/missile-paint-explosion.png');
-    animation: missile-explosion-animate var(--animation-time) steps(2) infinite;
+    background-image: url('/img/missile-explosion.png');
+    animation: missile-explosion-animate var(--animation-time) steps(6) infinite;
 }
 
 
@@ -250,7 +250,7 @@ body {
         background-position-x: 0px;  
     }
     to {
-        background-position-x: 80px;
+        background-position-x: 240px;
     }
 }
 
@@ -260,10 +260,10 @@ body {
     bottom: 250px;
     left: 30%;
     
-    width: 80px;
-    height: 80px;
-    background-image: url('/img/missile-rocket-80-explosion.png');
-    animation: missile-rocket-explosion-animate var(--animation-time) steps(5) infinite;
+    width: 128px;
+    height: 128px;
+    background-image: url('/img/missile-rocket-explosion.png');
+    animation: missile-rocket-explosion-animate var(--animation-time) steps(10) infinite;
 }
 
 
@@ -272,6 +272,6 @@ body {
         background-position-x: 0px;  
     }
     to {
-        background-position-x: 400px;
+        background-position-x: -1280px;
     }
 }
