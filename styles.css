@@ -1,3 +1,5 @@
+:root{--animation-time: 0.2s;}
+
 *, *::after, *::before {
     margin: 0;
     padding: 0;
@@ -14,7 +16,7 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    /* background-color: black; */
+    /*background-color: black;*/
     background-image: url('/img/background.jpg');
 }
 
@@ -26,7 +28,7 @@ body {
     width: 96px;
     height: 96px;
     background-image: url('/img/spaceship.png');
-    animation: spaceship-animate .2s steps(8) infinite;
+    animation: spaceship-animate var(--animation-time) steps(8) infinite;
 }
 
 @keyframes spaceship-animate {
@@ -45,8 +47,8 @@ body {
 
     width: 64px;
     height: 64px;
-    background-image: url('/img/css_sprites.png');
-    animation: falcon-animate .2s steps(5) infinite;
+    background-image: url('/img/falcon.png');
+    animation: falcon-animate var(--animation-time) steps(5) infinite;
 
 }
 
@@ -57,5 +59,26 @@ body {
 
     to {
         background-position-x: 320px;
+    }
+}
+
+.destroyer {
+    position: absolute;
+    top: 0px;
+    left: 30%;
+    
+    width: 128px;
+    height: 128px;
+    background-image: url('/img/destroyer.png');
+    animation: destroyer-animate var(--animation-time) steps(9) infinite;
+}
+
+@keyframes destroyer-animate {
+    from {
+        background-position-x: 0px;
+    }
+
+    to {
+        background-position-x: 1152px;
     }
 }
