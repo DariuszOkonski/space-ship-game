@@ -12,6 +12,10 @@
 
 body {
     box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 28px;
+    text-transform: uppercase;
 }
 
 .container {
@@ -316,3 +320,34 @@ body {
     height: 96px;
     background-image: url('/img/bonus-missile.png');
 }
+
+.status {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 100%;
+    z-index: 100;
+    background-color: transparent;
+    color: #fff;
+    padding: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bonus-icons {
+    display: flex;
+}
+
+.bonus-icons img {
+    width: 50px;
+}
+
+.bonus-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+ }
