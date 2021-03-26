@@ -129,7 +129,7 @@ body {
     
     width: 40px;
     height: 40px;
-    background-image: url('/img/missile-paint.png');
+    background-image: url('/img/missile.png');
     animation: missile-animate var(--animation-time) steps(2) infinite;
 }
 
