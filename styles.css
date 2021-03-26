@@ -289,3 +289,30 @@ body {
         background-position-x: -1280px;
     }
 }
+
+.bonus-engine {
+    position: absolute;
+    top: 200px;
+    left: 100px;
+    width: 96px;
+    height: 96px;
+    background-image: url('/img/bonus-engine.png');
+}
+
+.bonus-heart {
+    position: absolute;
+    top: 200px;
+    left: 200px;
+    width: 96px;
+    height: 96px;
+    background-image: url('/img/bonus-heart.png');
+}
+
+.bonus-missile {
+    position: absolute;
+    top: 200px;
+    left: 300px;
+    width: 96px;
+    height: 96px;
+    background-image: url('/img/bonus-missile.png');
+}
