@@ -351,3 +351,56 @@ body {
     align-items: center;
     margin-left: 20px;
  }
+
+
+ .modal {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100vw;
+     height: 100vh;
+     background-color: rgba(0, 0, 0, 0.5);
+     z-index: 999;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+ .modal-content {
+     display: flex;
+     flex-direction: column;
+     background-color: rgba(255, 255, 255, 0.1);
+     padding: 50px;
+ }
+
+ .modal-header {
+    color: #fff;
+    font-size: 24px;
+    margin-bottom: 40px;
+    font-weight: 100;
+    letter-spacing: 1px;
+ }
+
+ .modal-button {
+     font-family: inherit;
+     color: #fff;
+     border: none;
+     border: 1px solid #fff;
+     background-color: transparent;
+     padding: 20px 10px;
+     font-size: 20px;
+     text-transform: uppercase;
+     font-weight: 100;
+     cursor: pointer;
+     letter-spacing: 2px;
+     outline: none;
+     transition: background-color .1s ease-in;
+ }
+
+ .modal-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+ }
+
+ .modal.hide {
+     display: none;
+ }
