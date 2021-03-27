@@ -29,6 +29,12 @@ body {
     animation: background-animate var(--background-time) linear infinite;
 }
 
+.container.red {
+    background-image: none;
+    animation: none;
+    background-color: rgb(75, 4, 4);
+}
+
 @keyframes background-animate {
     from {
         background-position-y: 0vh;
@@ -36,12 +42,6 @@ body {
     to {
         background-position-y: 100vh;
     }
-}
-
-.container.red {
-    background-image: none;
-    animation: none;
-    background-color: rgb(75, 4, 4);
 }
 
 .spaceship {

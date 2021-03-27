@@ -1,7 +1,5 @@
-initGame();
+console.log('Hello world')
 
-function initGame() {
-
-    // Your game can start here, but define separate functions, don't write everything in here :)
-    console.log('init')
+window.onload = () => {
+    console.log('welcome')
 }
