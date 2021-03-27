@@ -4,17 +4,16 @@ export class Ship {
         this.y = y;
         this.livesCount = livesCount;
         this.className = className;
-        this.htmlElement = null;
-        this.initialization()
+        // this.htmlElement = null;
+        // this.initialization()
     }
 
-    initialization() {
-        this.createSpaceship()
-    }
+    // initialization() {
+    //     this.createSpaceship()
+    // }
 
-    createSpaceship() {
-        const div = document.createElement('div')
-        div.classList.add(this.className)        
-        this.htmlElement = div;
-    }
+    // createSpaceship() {
+    //     this.htmlElement = document.createElement('div')
+    //     this.htmlElement.classList.add(this.className)        
+    // }
 }

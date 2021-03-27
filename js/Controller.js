@@ -12,7 +12,7 @@ class Controller {
     }
     
     initialization() {
-        console.log(this.spaceship)
+        // console.log(this.spaceship)
     }
 }
 
