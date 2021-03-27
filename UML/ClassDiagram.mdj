@@ -3745,23 +3745,6 @@
 										},
 										{
 											"_type": "UMLAttributeView",
-											"_id": "AAAAAAF4bq/dVvzTvK8=",
-											"_parent": {
-												"$ref": "AAAAAAF4bq8xD/r4jo8="
-											},
-											"model": {
-												"$ref": "AAAAAAF4bq/dT/zH5yw="
-											},
-											"font": "Arial;13;0",
-											"left": 789,
-											"top": 100,
-											"width": 147.748046875,
-											"height": 13,
-											"text": "+htmlElement",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
 											"_id": "AAAAAAF4bq/6Df0ZHvg=",
 											"_parent": {
 												"$ref": "AAAAAAF4bq8xD/r4jo8="
@@ -3771,7 +3754,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 789,
-											"top": 115,
+											"top": 100,
 											"width": 147.748046875,
 											"height": 13,
 											"text": "+livesCount",
@@ -3806,7 +3789,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 789,
-											"top": 130,
+											"top": 115,
 											"width": 147.748046875,
 											"height": 13,
 											"text": "+className",
@@ -3817,7 +3800,7 @@
 									"left": 784,
 									"top": 65,
 									"width": 157.748046875,
-									"height": 83
+									"height": 68
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -3840,7 +3823,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 789,
-											"top": 153,
+											"top": 138,
 											"width": 147.748046875,
 											"height": 13,
 											"text": "+initialization(className)",
@@ -3857,7 +3840,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 789,
-											"top": 168,
+											"top": 153,
 											"width": 147.748046875,
 											"height": 13,
 											"text": "+explode()",
@@ -3866,7 +3849,7 @@
 									],
 									"font": "Arial;13;0",
 									"left": 784,
-									"top": 148,
+									"top": 133,
 									"width": 157.748046875,
 									"height": 38
 								},
@@ -7896,7 +7879,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF4bqsQIPXVG3o="
 							},
-							"name": "timeCount"
+							"name": "timeCount",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -7965,7 +7949,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF4bqsl0PX/114="
 							},
-							"name": "livesCount"
+							"name": "livesCount",
+							"type": ""
 						}
 					]
 				},
@@ -8013,7 +7998,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF4bqt7HvYqn/4="
 							},
-							"name": "timeCount"
+							"name": "timeCount",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -8082,7 +8068,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF4bquZ+PZULO4="
 							},
-							"name": "rocketCount"
+							"name": "rocketCount",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -8177,7 +8164,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF4bqxpr/aKxQ8="
 							},
-							"name": "missiles[]"
+							"name": "missiles[]",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -8221,7 +8209,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF4bqzqSvfOs64="
 							},
-							"name": "spaceship"
+							"name": "spaceship",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -8229,7 +8218,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF4bqzqSvfOs64="
 							},
-							"name": "enemies[]"
+							"name": "enemies[]",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -8237,7 +8227,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF4bqzqSvfOs64="
 							},
-							"name": "bonuses[]"
+							"name": "bonuses[]",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -8291,15 +8282,6 @@
 								"$ref": "AAAAAAF4bq8xDvrw/lc="
 							},
 							"name": "y",
-							"type": ""
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAF4bq/dT/zH5yw=",
-							"_parent": {
-								"$ref": "AAAAAAF4bq8xDvrw/lc="
-							},
-							"name": "htmlElement",
 							"type": ""
 						},
 						{
@@ -8412,7 +8394,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF4c5CVwhp2vdk="
 							},
-							"name": "x"
+							"name": "x",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -8420,7 +8403,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF4c5CVwhp2vdk="
 							},
-							"name": "y"
+							"name": "y",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -8428,7 +8412,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF4c5CVwhp2vdk="
 							},
-							"name": "htmlElement"
+							"name": "htmlElement",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -8436,7 +8421,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF4c5CVwhp2vdk="
 							},
-							"name": "className"
+							"name": "className",
+							"type": ""
 						}
 					],
 					"operations": [
