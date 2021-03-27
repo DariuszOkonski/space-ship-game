@@ -38,6 +38,12 @@ body {
     }
 }
 
+.container.red {
+    background-image: none;
+    animation: none;
+    background-color: rgb(75, 4, 4);
+}
+
 .spaceship {
     position: absolute;
     bottom: 0px;
