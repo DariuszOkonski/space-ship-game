@@ -53,6 +53,11 @@ export class SpaceShip extends Ship {
                 case 38:
                     console.log('missile rocket (^ arrow up)')
                     break;
+
+                case 40:
+                    console.log(this.className);
+                    this.explode();
+                    break;
             }
         })
     }
@@ -71,6 +76,30 @@ export class SpaceShip extends Ship {
             this.x += this.speedX;
             this.htmlElement.style.left = `${this.x}px`;
         }
+    }
+
+
+    shootSingleMissile() {
+
+    }
+
+    shootRocketMissile() {
+
+    }
+
+    shootTrippleMissile() {
+
+    }
+
+    explode() {
+        // this.className.remove('spaceship');
+        // this.className.add('spaceship-explosion');
+        this.className = 'spaceship-explosion';
+        this.htmlElement.classList.remove('spaceship');
+        this.htmlElement.classList.add('spaceship-explosion');
+        setTimeout(() => {
+            this.htmlElement.remove();
+        }, 1000);
     }
 
 }
