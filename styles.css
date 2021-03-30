@@ -2,6 +2,7 @@
     --animation-time: 0.2s;
     --explosion-time: 1s;
     --background-time: 60s;
+    --missile-size: 40px;
 }
 
 *, *::after, *::before {
@@ -49,6 +50,7 @@ body {
     position: absolute;
     /* bottom: 0px;
     left: 50%; */
+    z-index: 100;
     
     width: 96px;
     height: 96px;
@@ -131,11 +133,11 @@ body {
 
 .missile {
     position: absolute;
-    bottom: 50px;
-    left: 70%;
-    
-    width: 40px;
-    height: 40px;
+    /* bottom: 50px;
+    left: 70%; */
+    z-index:1;
+    width: var(--missile-size);
+    height: var(--missile-size);
     background-image: url('/img/missile.png');
     animation: missile-animate var(--animation-time) steps(2) infinite;
 }

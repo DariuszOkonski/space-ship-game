@@ -21,6 +21,6 @@ export const domElements = {
 
 
 export const spaceShipSpeeds = {
-    regular: 20, 
-    fast: 10
+    regular: 10, 
+    fast: 20
 };

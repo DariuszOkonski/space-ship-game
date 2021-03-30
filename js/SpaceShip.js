@@ -1,5 +1,6 @@
 import { Ship } from './Ship.js';
 import {domElements, spaceShipSpeeds} from './utilities.js';
+import {Missile} from './Missile.js';
 
 export class SpaceShip extends Ship {
     missiles = [];
@@ -22,14 +23,15 @@ export class SpaceShip extends Ship {
 
     buildShip() {
         this.htmlElement = document.createElement('div')
-        domElements.container.appendChild(this.htmlElement)
         
         this.htmlElement.classList.add(this.className)
         this.htmlElement.style.bottom = 0;
         const halfScreen = (window.innerWidth / 2) - (this.htmlElement.clientWidth / 2);
-
+        
         this.htmlElement.style.left = `${halfScreen}px`
         this.x = halfScreen;
+
+        domElements.container.appendChild(this.htmlElement)
     }
 
     allowShipMovement() {
@@ -48,15 +50,25 @@ export class SpaceShip extends Ship {
 
                 case 32:
                     console.log('single shoot (space)')
+                    this.shootSingleMissile();
                     break;
 
                 case 38:
                     console.log('missile rocket (^ arrow up)')
                     break;
 
-                case 40:
-                    console.log(this.className);
-                    this.explode();
+            }
+        })
+
+        addEventListener('keyup', (event) => {
+            switch (event.keyCode) {
+                case 32:
+                    this.shootSingleMissile();
+                    console.log('single shoot (space)')
+                    break;
+
+                case 38:
+                    console.log('missile rocket (^ arrow up)')
                     break;
             }
         })
@@ -80,7 +92,11 @@ export class SpaceShip extends Ship {
 
 
     shootSingleMissile() {
-
+        const missileSize = parseInt(getComputedStyle(this.htmlElement).getPropertyValue('--missile-size'));
+        const xCoord = this.x + this.htmlElement.clientWidth/2 - missileSize/2;
+        const yCoord = 0 + this.htmlElement.clientHeight/2;
+        const missile = new Missile(xCoord, yCoord, 'missile', false, 1);
+        this.missiles.push(missile);
     }
 
     shootRocketMissile() {
