@@ -3,7 +3,7 @@ import {domElements} from './utilities.js';
 
 export class SpaceShip extends Ship {
     missiles = [];
-    speedX = 0;
+    speedX = 5;
     rocketCount = 0;
     trippleMissleCounter = 0;
     speedUpCounter = 0;
@@ -12,6 +12,15 @@ export class SpaceShip extends Ship {
     constructor(x, y, livesCount, className) {
         super(x, y, livesCount, className)
 
+        this.initialization()
+    }
+
+    initialization() {
+        this.buildShip()
+        this.allowShipMovement()
+    }
+
+    buildShip() {
         this.htmlElement = document.createElement('div')
         domElements.container.appendChild(this.htmlElement)
         
@@ -20,14 +29,41 @@ export class SpaceShip extends Ship {
         const halfScreen = (window.innerWidth / 2) - (this.htmlElement.clientWidth / 2);
 
         this.htmlElement.style.left = `${halfScreen}px`
-        
-        // console.log(halfScreen)
-        
-        console.log('print')
-        console.log(window.innerWidth / 2)
-        
-        
-        
-        console.log(this.htmlElement.clientWidth)
+        this.x = halfScreen;
+    }
+
+    allowShipMovement() {
+        addEventListener('keydown', (event) => {
+            switch (event.keyCode) {
+                case 37:
+                    console.log('<- move left')
+                    console.log(this.x)
+                    this.moveLeft();
+
+                    break;
+                case 39:
+                    console.log('move right ->')
+                    this.moveRight()
+                    break;
+
+                case 32:
+                    console.log('single shoot (space)')
+                    break;
+
+                case 38:
+                    console.log('missile rocket (^ arrow up)')
+                    break;
+            }
+        })
+    }
+
+    moveLeft() {
+        this.x -= this.speedX;
+        this.htmlElement.style.left = `${this.x}px`;
+    }
+
+    moveRight() {
+        this.x += this.speedX;
+        this.htmlElement.style.left = `${this.x}px`;
     }
 }
