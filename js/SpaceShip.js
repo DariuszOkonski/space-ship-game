@@ -9,6 +9,9 @@ export class SpaceShip extends Ship {
     trippleMissleCounter = 0;
     speedUpCounter = 0;
     htmlElement = null;
+    movingLeft = false;
+    movingRight = false;
+    intervalIndex = null;
 
     constructor(x, y, livesCount, className) {
         super(x, y, livesCount, className)
@@ -17,8 +20,9 @@ export class SpaceShip extends Ship {
     }
 
     initialization() {
-        this.buildShip()
-        this.allowShipMovement()
+        this.buildShip();
+        this.allowShipMovement();
+        this.movementLoop();
     }
 
     buildShip() {
@@ -38,14 +42,16 @@ export class SpaceShip extends Ship {
         addEventListener('keydown', (event) => {
             switch (event.keyCode) {
                 case 37:
-                    console.log('<- move left')
-                    console.log(this.x)
-                    this.moveLeft();
-
+                    // console.log('<- move left')
+                    // console.log(this.x)
+                    // this.moveLeft();
+                    this.movingLeft = true;
                     break;
+
                 case 39:
-                    console.log('move right ->')
-                    this.moveRight()
+                    // console.log('move right ->')
+                    // this.moveRight()
+                    this.movingRight = true;
                     break;
 
                 case 32:
@@ -62,21 +68,39 @@ export class SpaceShip extends Ship {
 
         addEventListener('keyup', (event) => {
             switch (event.keyCode) {
-                case 32:
-                    this.shootSingleMissile();
-                    console.log('single shoot (space)')
+                case 37:
+                    this.movingLeft = false;
                     break;
 
-                case 38:
-                    console.log('missile rocket (^ arrow up)')
+                case 39:
+                    this.movingRight = false;
                     break;
+
+                // case 32:
+                //     this.shootSingleMissile();
+                //     console.log('single shoot (space)')
+                //     break;
+
+                // case 38:
+                //     console.log('missile rocket (^ arrow up)')
+                //     break;
             }
         })
     }
 
+    movementLoop() {
+        this.intervalIndex = setInterval(() => {
+            if(this.movingLeft) {
+                this.moveLeft()
+            } else if(this.movingRight) {
+                this.moveRight()
+            }
+        }, this.speedX);
+    }
+
     moveLeft() {
         if (this.x > 0) {
-            this.x -= this.speedX;
+            this.x -= 5;
             this.htmlElement.style.left = `${this.x}px`;
         }
         
@@ -85,7 +109,7 @@ export class SpaceShip extends Ship {
 
     moveRight() {
         if (this.x < window.innerWidth - this.htmlElement.clientWidth) {
-            this.x += this.speedX;
+            this.x += 5;
             this.htmlElement.style.left = `${this.x}px`;
         }
     }
@@ -115,6 +139,7 @@ export class SpaceShip extends Ship {
         this.htmlElement.classList.add('spaceship-explosion');
         setTimeout(() => {
             this.htmlElement.remove();
+            clearInterval(this.intervalIndex);
         }, 1000);
     }
 
