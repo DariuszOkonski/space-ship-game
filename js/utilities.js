@@ -18,3 +18,9 @@ export const htmlClasses = {
 export const domElements = {
     container: document.getElementById('container')
 }
+
+
+export const spaceShipSpeeds = {
+    regular: 20, 
+    fast: 10
+};

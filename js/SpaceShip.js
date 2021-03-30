@@ -1,9 +1,9 @@
 import { Ship } from './Ship.js';
-import {domElements} from './utilities.js';
+import {domElements, spaceShipSpeeds} from './utilities.js';
 
 export class SpaceShip extends Ship {
     missiles = [];
-    speedX = 5;
+    speedX = spaceShipSpeeds.regular;
     rocketCount = 0;
     trippleMissleCounter = 0;
     speedUpCounter = 0;
@@ -58,12 +58,19 @@ export class SpaceShip extends Ship {
     }
 
     moveLeft() {
-        this.x -= this.speedX;
-        this.htmlElement.style.left = `${this.x}px`;
+        if (this.x > 0) {
+            this.x -= this.speedX;
+            this.htmlElement.style.left = `${this.x}px`;
+        }
+        
+
     }
 
     moveRight() {
-        this.x += this.speedX;
-        this.htmlElement.style.left = `${this.x}px`;
+        if (this.x < window.innerWidth - this.htmlElement.clientWidth) {
+            this.x += this.speedX;
+            this.htmlElement.style.left = `${this.x}px`;
+        }
     }
+
 }
