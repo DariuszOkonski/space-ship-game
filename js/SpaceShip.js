@@ -21,7 +21,7 @@ export class SpaceShip extends Ship {
 
     initialization() {
         this.buildShip();
-        this.allowShipMovement();
+        this.allowShipActions();
         this.movementLoop();
     }
 
@@ -38,29 +38,15 @@ export class SpaceShip extends Ship {
         domElements.container.appendChild(this.htmlElement)
     }
 
-    allowShipMovement() {
+    allowShipActions() {
         addEventListener('keydown', (event) => {
             switch (event.keyCode) {
                 case 37:
-                    // console.log('<- move left')
-                    // console.log(this.x)
-                    // this.moveLeft();
                     this.movingLeft = true;
                     break;
 
                 case 39:
-                    // console.log('move right ->')
-                    // this.moveRight()
                     this.movingRight = true;
-                    break;
-
-                case 32:
-                    console.log('single shoot (space)')
-                    this.shootSingleMissile();
-                    break;
-
-                case 38:
-                    console.log('missile rocket (^ arrow up)')
                     break;
 
             }
@@ -76,14 +62,14 @@ export class SpaceShip extends Ship {
                     this.movingRight = false;
                     break;
 
-                // case 32:
-                //     this.shootSingleMissile();
-                //     console.log('single shoot (space)')
-                //     break;
+                case 32:
+                    this.shootSingleMissile();
+                    console.log('single shoot (space)')
+                    break;
 
-                // case 38:
-                //     console.log('missile rocket (^ arrow up)')
-                //     break;
+                case 38:
+                    console.log('missile rocket (^ arrow up)')
+                    break;
             }
         })
     }
