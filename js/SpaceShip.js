@@ -11,7 +11,7 @@ export class SpaceShip extends Ship {
     htmlElement = null;
     movingLeft = false;
     movingRight = false;
-    intervalIndex = null;
+    intervalMovement = null;
 
     constructor(x, y, livesCount, className) {
         super(x, y, livesCount, className)
@@ -64,7 +64,8 @@ export class SpaceShip extends Ship {
 
                 case 32:
                     this.shootSingleMissile();
-                    console.log('single shoot (space)')
+                    // console.log('single shoot (space)')
+                    console.log(this.missiles);
                     break;
 
                 case 38:
@@ -75,7 +76,7 @@ export class SpaceShip extends Ship {
     }
 
     movementLoop() {
-        this.intervalIndex = setInterval(() => {
+        this.intervalMovement = setInterval(() => {
             if(this.movingLeft) {
                 this.moveLeft()
             } else if(this.movingRight) {
@@ -83,6 +84,7 @@ export class SpaceShip extends Ship {
             }
         }, this.speedX);
     }
+
 
     moveLeft() {
         if (this.x > 0) {
@@ -125,7 +127,7 @@ export class SpaceShip extends Ship {
         this.htmlElement.classList.add('spaceship-explosion');
         setTimeout(() => {
             this.htmlElement.remove();
-            clearInterval(this.intervalIndex);
+            clearInterval(this.intervalMovement);
         }, 1000);
     }
 

@@ -7,7 +7,7 @@ export class Missile {
     className = null;
     htmlElement = null;
     isEnemyMissile = null;
-
+    intrevalIndex = null;
 
     constructor(x, y, className, isEnemyMissile, damage) {
         this.isEnemyMissile = isEnemyMissile;
@@ -32,7 +32,7 @@ export class Missile {
         if (!this.isEnemyMissile) {
             this.htmlElement.style.left = `${this.x}px`;
             this.htmlElement.style.bottom = `${this.y}px`;
-            // this.htmlElement.style.bottom = '0px';
+            this.moveUp();
         }
         else {
             this.htmlElement.style.left = `${this.x}px`;
@@ -42,8 +42,18 @@ export class Missile {
         domElements.container.appendChild(this.htmlElement);
     }
 
-    moveUp() {
 
+    moveUp() {
+        
+        this.intrevalIndex = setInterval(() => {
+            this.y += 5;
+            this.htmlElement.style.bottom = `${this.y}px`;
+
+            // if(this.y >= window.innerHeight) {
+            //     this.remove();                
+            // }
+
+        }, 10);
     }
 
     moveDown() {
@@ -51,7 +61,10 @@ export class Missile {
     }
 
     remove() {
-
+        this.htmlElement.remove()
+        this.htmlElement = null;
+        clearInterval(this.intrevalIndex);
+        console.log(this.htmlElement)
     }
 
     explode() {
