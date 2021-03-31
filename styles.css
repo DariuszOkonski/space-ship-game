@@ -3,6 +3,7 @@
     --explosion-time: 1s;
     --background-time: 60s;
     --missile-size: 40px;
+    --rocket-size: 80px;
 }
 
 *, *::after, *::before {

@@ -16,7 +16,8 @@ export const htmlClasses = {
 }
 
 export const domElements = {
-    container: document.getElementById('container')
+    container: document.getElementById('container'),
+    rocket: document.querySelector('[data-rocket]') 
 }
 
 

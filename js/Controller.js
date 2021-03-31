@@ -10,16 +10,23 @@ class Controller {
     
 
     constructor() {
-        this.initialization()
+        this.setGame();
+        this.initialization();
     }
     
     initialization() {
-        const halfScreen = window.innerWidth / 2;
-        this.spaceship = new SpaceShip(0, halfScreen, 3, htmlClasses.spaceship);
-
+       
         this.missileCleaningLoop();
     }
 
+    setGame() {
+        // set spaceship
+        clearInterval(this.intervalMissilesCleaner);
+        const halfScreen = window.innerWidth / 2;
+        this.spaceship = new SpaceShip(0, halfScreen, 3, htmlClasses.spaceship);
+
+        //...
+    }
 
     missileCleaningLoop() {
         this.intervalMissilesCleaner = setInterval(() => {
@@ -29,8 +36,6 @@ class Controller {
                     arr.splice(index, 1);
                 }
             })
-            
-
         }, 100);
     }
 
