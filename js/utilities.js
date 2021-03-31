@@ -17,7 +17,8 @@ export const htmlClasses = {
 
 export const domElements = {
     container: document.getElementById('container'),
-    rocket: document.querySelector('[data-rocket]') 
+    rocket: document.querySelector('[data-rocket]'),
+    tripleMissile: document.querySelector('[data-triple-missile]'),
 }
 
 
@@ -25,3 +26,9 @@ export const spaceShipSpeeds = {
     regular: 20, 
     fast: 5
 };
+
+export const missilesSpeeds = {
+    missile: 5,
+    tripleMissile: 3,
+    missileRocket: 2
+}

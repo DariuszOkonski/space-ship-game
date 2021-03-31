@@ -1,4 +1,4 @@
-import {domElements} from './utilities.js' 
+import {domElements, htmlClasses, missilesSpeeds,} from './utilities.js' 
 
 export class Missile {
     x = null;
@@ -44,9 +44,17 @@ export class Missile {
 
 
     moveUp() {
+        let speed = 0;
+        if (this.className == htmlClasses.missile) {
+            speed = missilesSpeeds.missile;
+        } else if (this.className == htmlClasses.missileRocket) {
+            speed = missilesSpeeds.missileRocket;
+        } else {
+            speed = missilesSpeeds.tripleMissile;
+        }
         
         this.intrevalIndex = setInterval(() => {
-            this.y += 5;
+            this.y += speed;
             this.htmlElement.style.bottom = `${this.y}px`;
 
             // if(this.y >= window.innerHeight) {

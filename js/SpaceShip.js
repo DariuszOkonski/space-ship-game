@@ -6,7 +6,7 @@ export class SpaceShip extends Ship {
     missiles = [];
     speedX = spaceShipSpeeds.regular;
     rocketCount = 3;
-    trippleMissleCounter = 0;
+    trippleMissleCount = 10;
     speedUpCounter = 0;
     htmlElement = null;
     movingLeft = false;
@@ -35,7 +35,8 @@ export class SpaceShip extends Ship {
         this.htmlElement.style.left = `${halfScreen}px`
         this.x = halfScreen;
         domElements.rocket.innerText = `${this.rocketCount}`;
-        domElements.container.appendChild(this.htmlElement)
+        domElements.tripleMissile.innerText = `${this.trippleMissleCount}`;
+        domElements.container.appendChild(this.htmlElement);
         
     }
 
@@ -75,7 +76,13 @@ export class SpaceShip extends Ship {
                         console.log('missile rocket (^ arrow up)')
                     }
                     break;
-                
+
+                case 40:
+                    if (this.trippleMissleCount > 0) {
+                        this.shootTrippleMissile();
+                        console.log('triple shot');
+                    }
+                    break;
             }
         })
     }
@@ -109,20 +116,44 @@ export class SpaceShip extends Ship {
 
 
     shootSingleMissile() {
-        const missileSize = parseInt(getComputedStyle(this.htmlElement).getPropertyValue('--missile-size'));
-        const xCoord = this.x + this.htmlElement.clientWidth/2 - missileSize/2;
-        const yCoord = 0 + this.htmlElement.clientHeight/2;
-        const missile = new Missile(xCoord, yCoord, htmlClasses.missile, false, 1);
-        this.missiles.push(missile);
+        // const missileSize = parseInt(getComputedStyle(this.htmlElement).getPropertyValue('--missile-size'));
+        // const xCoord = this.x + this.htmlElement.clientWidth/2 - missileSize/2;
+        // const yCoord = 0 + this.htmlElement.clientHeight/2;
+        // const missile = new Missile(xCoord, yCoord, htmlClasses.missile, false, 1);
+        // this.missiles.push(missile);
+        this.createMissile('--missile-size', htmlClasses.missile, 1);
     }
 
     shootRocketMissile() {
         this.updateRocketsCount();
-        const rocketSize = parseInt(getComputedStyle(this.htmlElement).getPropertyValue('--rocket-size'));
-        const xCoord = this.x + this.htmlElement.clientWidth/2 - rocketSize/2
+        // const rocketSize = parseInt(getComputedStyle(this.htmlElement).getPropertyValue('--rocket-size'));
+        // const xCoord = this.x + this.htmlElement.clientWidth/2 - rocketSize/2
+        // const yCoord = 0 + this.htmlElement.clientHeight/2;
+        // const rocket = new Missile(xCoord, yCoord, htmlClasses.missileRocket, false, 3);
+        // this.missiles.push(rocket);
+        this.createMissile('--rocket-size', htmlClasses.missileRocket, 3);
+
+    }
+
+    
+    shootTrippleMissile() {
+        this.updateTripleMissilesCount();
+        this.createMissile('--missile-size', htmlClasses.missile, 1, true);
+    }
+
+    createMissile(cssSizeVar, htmlClass, damage, isTriple=false) {
+        const missileSize = parseInt(getComputedStyle(this.htmlElement).getPropertyValue(cssSizeVar));
+        const xCoord = this.x + this.htmlElement.clientWidth/2 - missileSize/2
         const yCoord = 0 + this.htmlElement.clientHeight/2;
-        const rocket = new Missile(xCoord, yCoord, htmlClasses.missileRocket, false, 3);
-        this.missiles.push(rocket);
+        const missile = new Missile(xCoord, yCoord, htmlClass, false, damage);
+        this.missiles.push(missile);
+        
+        if (isTriple){
+            const leftMissile =  new Missile(xCoord - 42, yCoord-20, htmlClass, false, damage);
+            const rightMissile =  new Missile(xCoord + 42, yCoord-20, htmlClass, false, damage);
+            this.missiles.push(leftMissile);
+            this.missiles.push(rightMissile);
+        }
     }
 
     updateRocketsCount() {
@@ -130,10 +161,11 @@ export class SpaceShip extends Ship {
         domElements.rocket.innerText = `${this.rocketCount}`;
     }
 
-
-    shootTrippleMissile() {
-
+    updateTripleMissilesCount() {
+        this.trippleMissleCount--;
+        domElements.tripleMissile.innerText = `${this.trippleMissleCount}`;
     }
+
 
     explode() {
         // this.className.remove('spaceship');
