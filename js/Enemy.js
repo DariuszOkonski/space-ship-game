@@ -22,7 +22,7 @@ export class Enemy extends Ship {
     }   
 
     moveDown() {
-
+        this.y -= this.speedY /////
     }
 
     remove() {

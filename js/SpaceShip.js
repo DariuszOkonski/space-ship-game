@@ -95,13 +95,13 @@ export class SpaceShip extends Ship {
             } else if(this.movingRight) {
                 this.moveRight()
             }
-        }, this.speedX);
+        }, 20);
     }
 
 
     moveLeft() {
         if (this.x > 0) {
-            this.x -= 5;
+            this.x -= 20;
             this.htmlElement.style.left = `${this.x}px`;
         }
         
