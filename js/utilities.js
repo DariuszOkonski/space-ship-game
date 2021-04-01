@@ -28,6 +28,7 @@ export const spaceShipSpeeds = {
     fast: 5
 };
 
+
 export const missilesSpeeds = {
     missile: 5,
     tripleMissile: 3,

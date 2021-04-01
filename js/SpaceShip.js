@@ -11,7 +11,7 @@ export class SpaceShip extends Ship {
     htmlElement = null;
     movingLeft = false;
     movingRight = false;
-    intervalMovement = null;
+    // intervalMovement = null;
 
     constructor(x, y, livesCount, className) {
         super(x, y, livesCount, className)
@@ -117,21 +117,11 @@ export class SpaceShip extends Ship {
 
 
     shootSingleMissile() {
-        // const missileSize = parseInt(getComputedStyle(this.htmlElement).getPropertyValue('--missile-size'));
-        // const xCoord = this.x + this.htmlElement.clientWidth/2 - missileSize/2;
-        // const yCoord = 0 + this.htmlElement.clientHeight/2;
-        // const missile = new Missile(xCoord, yCoord, htmlClasses.missile, false, 1);
-        // this.missiles.push(missile);
         this.createMissile('--missile-size', htmlClasses.missile, 1);
     }
 
     shootRocketMissile() {
         this.updateRocketsCount();
-        // const rocketSize = parseInt(getComputedStyle(this.htmlElement).getPropertyValue('--rocket-size'));
-        // const xCoord = this.x + this.htmlElement.clientWidth/2 - rocketSize/2
-        // const yCoord = 0 + this.htmlElement.clientHeight/2;
-        // const rocket = new Missile(xCoord, yCoord, htmlClasses.missileRocket, false, 3);
-        // this.missiles.push(rocket);
         this.createMissile('--rocket-size', htmlClasses.missileRocket, 3);
 
     }
@@ -168,16 +158,16 @@ export class SpaceShip extends Ship {
     }
 
 
-    explode() {
-        // this.className.remove('spaceship');
-        // this.className.add('spaceship-explosion');
-        this.className = htmlClasses.spaceshipExplosion;
-        this.htmlElement.classList.remove(htmlClasses.spaceship);
-        this.htmlElement.classList.add(htmlClasses.spaceshipExplosion);
-        setTimeout(() => {
-            this.htmlElement.remove();
-            clearInterval(this.intervalMovement);
-        }, 1000);
-    }
+    // explode() {
+    //     // this.className.remove('spaceship');
+    //     // this.className.add('spaceship-explosion');
+    //     this.className = htmlClasses.spaceshipExplosion;
+    //     this.htmlElement.classList.remove(htmlClasses.spaceship);
+    //     this.htmlElement.classList.add(htmlClasses.spaceshipExplosion);
+    //     setTimeout(() => {
+    //         this.htmlElement.remove();
+    //         clearInterval(this.intervalMovement);
+    //     }, 1000);
+    // }
 
 }
