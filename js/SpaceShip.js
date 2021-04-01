@@ -67,7 +67,6 @@ export class SpaceShip extends Ship {
 
                 case 32:
                     this.shootSingleMissile();
-                    // console.log('single shoot (space)')
                     console.log(this.missiles);
                     break;
 
@@ -101,7 +100,7 @@ export class SpaceShip extends Ship {
 
     moveLeft() {
         if (this.x > 0) {
-            this.x -= 20;
+            this.x -= this.speedX;
             this.htmlElement.style.left = `${this.x}px`;
         }
         
@@ -110,7 +109,7 @@ export class SpaceShip extends Ship {
 
     moveRight() {
         if (this.x < window.innerWidth - this.htmlElement.clientWidth) {
-            this.x += 5;
+            this.x += this.speedX;
             this.htmlElement.style.left = `${this.x}px`;
         }
     }
@@ -155,6 +154,23 @@ export class SpaceShip extends Ship {
     updateTripleMissilesCount() {
         this.trippleMissleCount--;
         domElements.tripleMissile.innerText = `${this.trippleMissleCount}`;
+    }
+
+    collectSpeedUp(timeout) {
+
+        this.speedX = spaceShipSpeeds.fast;
+        let counter = parseFloat(timeout/1000);
+        
+        let counterInverval = setInterval(() => {
+            counter -= 0.1
+            domElements.engine.innerText = counter.toFixed(1);
+        }, 100);
+
+        setTimeout(() => {
+            this.speedX = spaceShipSpeeds.regular;
+            clearInterval(counterInverval);
+            domElements.engine.innerText = '0.0';
+        }, timeout);
     }
 
 

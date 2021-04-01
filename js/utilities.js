@@ -20,13 +20,14 @@ export const domElements = {
     container: document.getElementById('container'),
     rocket: document.querySelector('[data-rocket]'),
     tripleMissile: document.querySelector('[data-triple-missile]'),
-    hearts: document.querySelector('[data-heart]')
+    hearts: document.querySelector('[data-heart]'),
+    engine: document.querySelector('[data-engine]')
 }
 
 
 export const spaceShipSpeeds = {
     regular: 5, 
-    fast: 20;
+    fast: 20
 };
 
 export const enemiesSpeed = {
