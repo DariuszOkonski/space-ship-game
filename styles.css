@@ -362,6 +362,10 @@ body {
     margin-left: 20px;
  }
 
+ .bonus-count {
+     min-width: 35px;
+ }
+
 
  .modal {
      position: absolute;
