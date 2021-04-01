@@ -58,30 +58,40 @@ export class SpaceShip extends Ship {
         addEventListener('keyup', (event) => {
             switch (event.keyCode) {
                 case 37:
+                    // LEFT ARROW key - move left
                     this.movingLeft = false;
                     break;
 
                 case 39:
+                    // RIGHT ARROW key - move right
                     this.movingRight = false;
                     break;
 
                 case 32:
+                    // SPACE key - single shot
                     this.shootSingleMissile();
                     console.log(this.missiles);
                     break;
 
-                case 38:
+                case 81:
+                    // Q key - rocket shot
                     if (this.rocketCount > 0) {
                         this.shootRocketMissile();
                         console.log('missile rocket (^ arrow up)')
                     }
                     break;
 
-                case 40:
+                case 87:
+                    // W key - tripple missile shot
                     if (this.trippleMissleCount > 0) {
                         this.shootTrippleMissile();
                         console.log('triple shot');
                     }
+                    break;
+
+                case 40:
+                    // ARROW DOWN key - temporary testing key
+                    this.collectSpeedUp(5000);
                     break;
             }
         })
