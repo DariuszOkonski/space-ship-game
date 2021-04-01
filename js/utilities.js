@@ -2,6 +2,7 @@ export const htmlClasses = {
     spaceship: "spaceship",
     destroyer: "destroyer",
     hawk: "hawk",
+    falcon: "falcon",
     missileRocket: "missile-rocket",
     missile: "missile",
     spaceshipExplosion: "spaceship-explosion",
@@ -28,6 +29,11 @@ export const spaceShipSpeeds = {
     fast: 5
 };
 
+export const enemiesSpeed = {
+    falcon: 10,
+    hawk: 20,
+    destroyer: 5,
+}
 
 export const missilesSpeeds = {
     missile: 5,

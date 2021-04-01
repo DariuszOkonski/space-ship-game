@@ -70,14 +70,13 @@ body {
 
 .falcon {
     position: absolute;
-    top: 0;
-    left: 0;
+    /* top: 0;
+    left: 0; */
 
     width: 64px;
     height: 64px;
     background-image: url('/img/falcon.png');
     animation: falcon-animate var(--animation-time) steps(5) infinite;
-
 }
 
 @keyframes falcon-animate {
@@ -92,8 +91,8 @@ body {
 
 .hawk {
     position: absolute;
-    top: 0px;
-    left:70%;
+    /* top: 0px;
+    left:70%; */
 
     width: 96px;
     height: 96px;
@@ -112,8 +111,8 @@ body {
 
 .destroyer {
     position: absolute;
-    top: 0px;
-    left: 30%;
+    /* top: 0px;
+    left: 30%; */
     
     width: 128px;
     height: 128px;
