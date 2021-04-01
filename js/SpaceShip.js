@@ -35,6 +35,7 @@ export class SpaceShip extends Ship {
         this.htmlElement.style.left = `${halfScreen}px`
         this.x = halfScreen;
         domElements.rocket.innerText = `${this.rocketCount}`;
+        domElements.hearts.innerText = `${this.livesCount}`;
         domElements.tripleMissile.innerText = `${this.trippleMissleCount}`;
         domElements.container.appendChild(this.htmlElement);
         

@@ -19,6 +19,7 @@ export const domElements = {
     container: document.getElementById('container'),
     rocket: document.querySelector('[data-rocket]'),
     tripleMissile: document.querySelector('[data-triple-missile]'),
+    hearts: document.querySelector('[data-heart]')
 }
 
 
