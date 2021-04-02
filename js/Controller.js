@@ -68,8 +68,8 @@ class Controller {
                     }, 150);
 
                     if (this.spaceship.livesCount <= 0) {
-                        // this.spaceship.removeEventListener('keyup');
-                        this.spaceship.isExplode = true;
+                        this.spaceship.removeListeners();
+
                         this.spaceship.explode();
                         setTimeout(() => {
                             domElements.endScore.innerText = this.scores;
