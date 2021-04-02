@@ -86,4 +86,11 @@ export class Missile {
             }, 1000);
         }
     }
+
+    getHitBox() {
+        return {
+            alt: this.y,
+            peek: this.x + (this.htmlElement.clientWidth / 2)
+        }
+    }
 }

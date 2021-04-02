@@ -38,4 +38,13 @@ export class Enemy extends Ship {
         clearInterval(this.intervalMovement)
     }
 
+    getHitBox() {
+        let hitboxToleranceCorrection = this.x * 0.02;
+        return {
+            leftSide: this.x + hitboxToleranceCorrection, 
+            rightSide: this.x + this.htmlElement.clientWidth - hitboxToleranceCorrection,
+            frontSide: this.y
+        }
+    }
+
 }

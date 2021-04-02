@@ -53,24 +53,13 @@ class Controller {
     enemiesCleaningLoop() {
         this.intervalEnemiesHitBottom = setInterval(() => {
             this.enemies.forEach((enemy, index, arr) => {
-                if(enemy.y <= (0 - enemy.htmlElement.clientHeight)) {
-                    // processEnemiesPassing(enemy, index, arr);
-                    
+                if(enemy.y <= (0 - enemy.htmlElement.clientHeight)) {                    
                     enemy.remove();
                     arr.splice(index, 1);
-                    if (this.spaceship.livesCount > 0) {
-                        this.spaceship.livesCount--;
-                    }
-                    domElements.hearts.innerText = this.spaceship.livesCount;
-                    domElements.container.classList.add('red');
-                    setTimeout(() => {
-                        domElements.container.classList.remove('red');
-                    }, 150);
+                    this.processEnemyHitBottom();
 
                     if (this.spaceship.livesCount <= 0) {
-                        // this.spaceship.removeEventListener('keyup');
-                        // this.spaceship.isExplode = true;
-                        this.spaceship.forbidShipActions(); //////
+                         //////
                         this.spaceship.explode();
                         this.showGameOverScreen();
                     }
@@ -78,6 +67,15 @@ class Controller {
             });            
         }, 100);
 
+    }
+
+    processEnemyHitBottom() {
+        this.spaceship.livesCount--;
+        domElements.hearts.innerText = this.spaceship.livesCount;
+        domElements.container.classList.add('red');
+        setTimeout(() => {
+            domElements.container.classList.remove('red');
+        }, 150);
     }
 
     showGameOverScreen() {
@@ -100,39 +98,24 @@ class Controller {
     checkEnemyHit() {
         this.intervalEnemyHit = setInterval(() => {
             this.spaceship.missiles.forEach((missile, missileIndex, missileArr) => {
-                const flyingMissile = {
-                    alt: missile.y,
-                    peek: missile.x + (missile.htmlElement.clientWidth / 2)
-                }
+                const flyingMissile = missile.getHitBox();
 
                 this.enemies.forEach((enemy, enemyIndex, enemyArr) => {
-                    let hitboxToleranceCorrection = enemy.x * 0.02;
-
-                    const flyingEnemy = {
-                        leftSide: enemy.x + hitboxToleranceCorrection, 
-                        rightSide: enemy.x + enemy.htmlElement.clientWidth - hitboxToleranceCorrection,
-                        frontSide: enemy.y
-                    }
-
-                    // console.log(flyingEnemy)
-
+                    const flyingEnemy = enemy.getHitBox();
+                    
                     if((flyingMissile.alt >= flyingEnemy.frontSide) 
-                        && (flyingMissile.peek > flyingEnemy.leftSide) && (flyingMissile.peek < flyingEnemy.rightSide)) {
-                            
-                            
+                        && (flyingMissile.peek > flyingEnemy.leftSide) 
+                        && (flyingMissile.peek < flyingEnemy.rightSide)) {
+                             
                             missile.explode();
-                            missileArr.splice(missileIndex, 1)
-                            
-                            // console.log(enemy.livesCount)
+                            missileArr.splice(missileIndex, 1)                            
                             enemy.processBeingHit(missile.damage)
 
                             if(enemy.livesCount <= 0) {
                                 enemyArr.splice(enemyIndex, 1);
                             }
-                            this.scores += missile.damage;
-                            domElements.scores.innerText = `Scores: ${this.scores}`;
+                    
                     }
-
                 })
             })
         }, 5);
