@@ -30,6 +30,9 @@ class Controller {
     setGame() {
         // set spaceship
         clearInterval(this.intervalMissilesCleaner);
+        clearInterval(this.intervalEnemyHit);
+        clearInterval(this.intervalSpaceShipHit);
+        clearInterval(this.intervalEnemiesHitBottom);
         const halfScreen = window.innerWidth / 2;
         this.spaceship = new SpaceShip(0, halfScreen);
         this.scores = 0;
@@ -51,20 +54,44 @@ class Controller {
         this.intervalEnemiesHitBottom = setInterval(() => {
             this.enemies.forEach((enemy, index, arr) => {
                 if(enemy.y <= (0 - enemy.htmlElement.clientHeight)) {
+                    // processEnemiesPassing(enemy, index, arr);
+                    
                     enemy.remove();
                     arr.splice(index, 1);
-                    this.spaceship.livesCount--;
+                    if (this.spaceship.livesCount > 0) {
+                        this.spaceship.livesCount--;
+                    }
                     domElements.hearts.innerText = this.spaceship.livesCount;
                     domElements.container.classList.add('red');
                     setTimeout(() => {
                         domElements.container.classList.remove('red');
-                    }, 100);
+                    }, 150);
+
+                    if (this.spaceship.livesCount <= 0) {
+                        // this.spaceship.removeEventListener('keyup');
+                        this.spaceship.isExplode = true;
+                        this.spaceship.explode();
+                        setTimeout(() => {
+                            domElements.endScore.innerText = this.scores;
+                            domElements.modal.classList.remove('hide');
+                        }, 1000);
+                    }
                 }
             });            
         }, 100);
 
     }
 
+    // processEnemiesPassing(enemy, index, arr) {
+    //     enemy.remove();
+    //     arr.splice(index, 1);
+    //     this.spaceship.livesCount--;
+    //     domElements.hearts.innerText = this.spaceship.livesCount;
+    //     domElements.container.classList.add('red');
+    //     setTimeout(() => {
+    //         domElements.container.classList.remove('red');
+    //     }, 150);
+    // }
 
     checkEnemyHit() {
         this.intervalEnemyHit = setInterval(() => {
@@ -98,7 +125,6 @@ class Controller {
                             if(enemy.livesCount <= 0) {
                                 enemyArr.splice(enemyIndex, 1);
                             }
-                            // console.log(this.enemies)
                             this.scores += missile.damage;
                             domElements.scores.innerText = `Scores: ${this.scores}`;
                     }
@@ -121,6 +147,12 @@ class Controller {
         
         const hawk = new Hawk(300, (window.innerHeight - 150));
         this.enemies.push(hawk)
+        
+        const hawk1 = new Hawk(500, (window.innerHeight - 250));
+        this.enemies.push(hawk1)
+        
+        const hawk2 = new Hawk(700, (window.innerHeight - 350));
+        this.enemies.push(hawk2)
 
         const destroyer = new Destroyer(500, (window.innerHeight - 200));
         this.enemies.push(destroyer)

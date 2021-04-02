@@ -19,6 +19,8 @@ export class Ship {
         this.htmlElement.classList.remove(this.className);
         this.className = `${this.className}-explosion`;
         this.htmlElement.classList.add(this.className);
+        this.movingLeft = false;
+        this.movingRight = false;
         setTimeout(() => {
             this.htmlElement.remove();
             clearInterval(this.intervalMovement);

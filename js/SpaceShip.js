@@ -11,7 +11,6 @@ export class SpaceShip extends Ship {
     htmlElement = null;
     movingLeft = false;
     movingRight = false;
-    // intervalMovement = null;
 
     constructor(x, y) {
         super(x, y, shipsLivesCount.spaceship, htmlClasses.spaceship)
@@ -41,9 +40,28 @@ export class SpaceShip extends Ship {
         
     }
 
+    // allowShipActions() {
+    //     addEventListener('keydown', (event) => {
+    //         switch (event.keyCode) {
+    //             case 37:
+    //                 this.movingLeft = true;
+    //                 break;
+
+    //             case 39:
+    //                 this.movingRight = true;
+    //                 break;
+
+    //         }
+    //     })
+
     allowShipActions() {
-        addEventListener('keydown', (event) => {
-            switch (event.keyCode) {
+        addEventListener('keydown', () => this.keyDownFunction(event));
+
+        addEventListener('keyup', (event) => this.keyUpFunction(event));
+    }
+
+    keyDownFunction(event) {
+        switch (event.keyCode) {
                 case 37:
                     this.movingLeft = true;
                     break;
@@ -51,50 +69,48 @@ export class SpaceShip extends Ship {
                 case 39:
                     this.movingRight = true;
                     break;
-
             }
-        })
+    }
 
-        addEventListener('keyup', (event) => {
-            switch (event.keyCode) {
-                case 37:
-                    // LEFT ARROW key - move left
-                    this.movingLeft = false;
-                    break;
+    keyUpFunction(event) {
+        switch (event.keyCode) {
+            case 37:
+                // LEFT ARROW key - move left
+                this.movingLeft = false;
+                break;
 
-                case 39:
-                    // RIGHT ARROW key - move right
-                    this.movingRight = false;
-                    break;
+            case 39:
+                // RIGHT ARROW key - move right
+                this.movingRight = false;
+                break;
 
-                case 32:
-                    // SPACE key - single shot
-                    this.shootSingleMissile();
-                    console.log(this.missiles);
-                    break;
+            case 32:
+                // SPACE key - single shot
+                this.shootSingleMissile();
+                console.log(this.missiles);
+                break;
 
-                case 81:
-                    // Q key - rocket shot
-                    if (this.rocketCount > 0) {
-                        this.shootRocketMissile();
-                        console.log('missile rocket (^ arrow up)')
-                    }
-                    break;
+            case 81:
+                // Q key - rocket shot
+                if (this.rocketCount > 0) {
+                    this.shootRocketMissile();
+                    console.log('missile rocket (^ arrow up)')
+                }
+                break;
 
-                case 87:
-                    // W key - tripple missile shot
-                    if (this.trippleMissleCount > 0) {
-                        this.shootTrippleMissile();
-                        console.log('triple shot');
-                    }
-                    break;
+            case 87:
+                // W key - tripple missile shot
+                if (this.trippleMissleCount > 0) {
+                    this.shootTrippleMissile();
+                    console.log('triple shot');
+                }
+                break;
 
-                case 40:
-                    // ARROW DOWN key - temporary testing key
-                    this.collectSpeedUp(5000);
-                    break;
-            }
-        })
+            case 40:
+                // ARROW DOWN key - temporary testing key
+                this.collectSpeedUp(5000);
+                break;
+        }
     }
 
     movementLoop() {

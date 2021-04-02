@@ -18,6 +18,8 @@ export const htmlClasses = {
 
 export const domElements = {
     container: document.getElementById('container'),
+    modal: document.querySelector('[data-modal]'),
+    endScore: document.querySelector('[data-end-score]'),
     rocket: document.querySelector('[data-rocket]'),
     tripleMissile: document.querySelector('[data-triple-missile]'),
     hearts: document.querySelector('[data-heart]'),
@@ -34,7 +36,7 @@ export const spaceShipSpeeds = {
 
 export const enemiesSpeed = {
     falcon: 2,
-    hawk: 3,
+    hawk: 10,
     destroyer: 1,
 }
 
