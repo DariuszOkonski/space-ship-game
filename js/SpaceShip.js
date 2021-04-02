@@ -55,9 +55,19 @@ export class SpaceShip extends Ship {
     //     })
 
     allowShipActions() {
-        addEventListener('keydown', () => this.keyDownFunction(event));
+        addEventListener('keydown', (event) => this.keyDownFunction(event));
 
         addEventListener('keyup', (event) => this.keyUpFunction(event));
+    }
+////////////
+    forbidShipActions() {
+        this.movingLeft = false;
+        this.movingRight = false;
+        clearInterval(this.intervalMovement);
+        // FOOKING EVENT LISTENERS TO CORRECT - STILL CAN SHOOT AFTER EXPLOSION
+        removeEventListener('keyup', (event) => this.keyUpFunction(event));
+        removeEventListener('keydown', (event) => this.keyDownFunction(event));
+///////////
     }
 
     keyDownFunction(event) {
@@ -197,5 +207,10 @@ export class SpaceShip extends Ship {
             clearInterval(counterInverval);
             domElements.engine.innerText = '0.0';
         }, timeout);
+    }
+
+    explode() {
+        this.forbidShipActions();
+        super.explode();
     }
 }

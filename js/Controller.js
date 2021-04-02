@@ -69,12 +69,10 @@ class Controller {
 
                     if (this.spaceship.livesCount <= 0) {
                         // this.spaceship.removeEventListener('keyup');
-                        this.spaceship.isExplode = true;
+                        // this.spaceship.isExplode = true;
+                        this.spaceship.forbidShipActions(); //////
                         this.spaceship.explode();
-                        setTimeout(() => {
-                            domElements.endScore.innerText = this.scores;
-                            domElements.modal.classList.remove('hide');
-                        }, 1000);
+                        this.showGameOverScreen();
                     }
                 }
             });            
@@ -82,6 +80,12 @@ class Controller {
 
     }
 
+    showGameOverScreen() {
+        setTimeout(() => {
+            domElements.endScore.innerText = this.scores;
+            domElements.modal.classList.remove('hide');
+        }, 1000);
+    }
     // processEnemiesPassing(enemy, index, arr) {
     //     enemy.remove();
     //     arr.splice(index, 1);
