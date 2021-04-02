@@ -15,6 +15,7 @@ export class Missile {
         this.y = y;
         this.damage = damage;
         this.className = className;
+        this.targetHit = false;
         this.initialization();
 
     }
@@ -74,6 +75,15 @@ export class Missile {
     }
 
     explode() {
-
+        if(!this.targetHit) {
+            this.targetHit = true;
+            this.htmlElement.classList.remove(this.className);
+            this.className = `${this.className}-explosion`;
+            this.htmlElement.classList.add(this.className);
+            clearInterval(this.intrevalIndex);
+            setTimeout(() => {
+                this.htmlElement.remove();
+            }, 1000);
+        }
     }
 }

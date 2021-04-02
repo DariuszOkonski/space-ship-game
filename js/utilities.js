@@ -21,7 +21,8 @@ export const domElements = {
     rocket: document.querySelector('[data-rocket]'),
     tripleMissile: document.querySelector('[data-triple-missile]'),
     hearts: document.querySelector('[data-heart]'),
-    engine: document.querySelector('[data-engine]')
+    engine: document.querySelector('[data-engine]'),
+    scores: document.querySelector('[data-scores]')
 }
 
 
@@ -48,4 +49,9 @@ export const missilesSpeeds = {
     missile: 5,
     tripleMissile: 3,
     missileRocket: 2
+}
+
+export const missileDamage = {
+    missile: 1,
+    rocket: 3 
 }

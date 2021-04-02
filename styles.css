@@ -49,8 +49,6 @@ body {
 
 .spaceship {
     position: absolute;
-    /* bottom: 0px;
-    left: 50%; */
     z-index: 100;
     
     width: 96px;
@@ -70,9 +68,6 @@ body {
 
 .falcon {
     position: absolute;
-    /* top: 0;
-    left: 0; */
-
     width: 64px;
     height: 64px;
     background-image: url('/img/falcon.png');
@@ -91,9 +86,6 @@ body {
 
 .hawk {
     position: absolute;
-    /* top: 0px;
-    left:70%; */
-
     width: 96px;
     height: 96px;
     background-image: url('img/hawk.png');
@@ -110,10 +102,7 @@ body {
 }
 
 .destroyer {
-    position: absolute;
-    /* top: 0px;
-    left: 30%; */
-    
+    position: absolute;    
     width: 128px;
     height: 128px;
     background-image: url('/img/destroyer.png');
@@ -133,8 +122,6 @@ body {
 
 .missile {
     position: absolute;
-    /* bottom: 50px;
-    left: 70%; */
     z-index:1;
     width: var(--missile-size);
     height: var(--missile-size);
@@ -154,10 +141,7 @@ body {
 
 
 .missile-rocket {
-    position: absolute;
-    bottom: 50px;
-    left: 30%;
-    
+    position: absolute;    
     width: 80px;
     height: 80px;
     background-image: url('/img/missile-rocket.png');
@@ -178,9 +162,6 @@ body {
 
 .spaceship-explosion {
     position: absolute;
-    bottom: 100px;
-    left: 50%;
-    
     width: 96px;
     height: 96px;
     background-image: url('/img/spaceship-explosion.png');
@@ -198,9 +179,6 @@ body {
 
 .falcon-explosion {
     position: absolute;
-    top: 200px;
-    left: 0;
-
     width: 64px;
     height: 64px;
     background-image: url('/img/falcon-explosion.png');
@@ -220,9 +198,6 @@ body {
 
 .hawk-explosion {
     position: absolute;
-    top: 200px;
-    left:70%;
-
     width: 96px;
     height: 96px;
     background-image: url('img/hawk-explosion.png');
@@ -239,10 +214,7 @@ body {
 }
 
 .destroyer-explosion {
-    position: absolute;
-    top: 200px;
-    left: 30%;
-    
+    position: absolute;    
     width: 128px;
     height: 128px;
     background-image: url('/img/destroyer-explosion.png');
@@ -261,10 +233,7 @@ body {
 
 
 .missile-explosion {
-    position: absolute;
-    bottom: 250px;
-    left: 70%;
-    
+    position: absolute;    
     width: 40px;
     height: 40px;
     background-image: url('/img/missile-explosion.png');
@@ -283,10 +252,7 @@ body {
 
 
 .missile-rocket-explosion {
-    position: absolute;
-    bottom: 250px;
-    left: 30%;
-    
+    position: absolute;   
     width: 128px;
     height: 128px;
     background-image: url('/img/missile-rocket-explosion.png');

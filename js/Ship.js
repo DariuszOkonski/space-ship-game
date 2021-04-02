@@ -7,6 +7,14 @@ export class Ship {
         this.intervalMovement = null;
     }
 
+    processBeingHit(damage) {
+        this.livesCount -= damage
+
+        if(this.livesCount <= 0) {
+            this.explode();
+        }
+    }
+
     explode() {
         this.htmlElement.classList.remove(this.className);
         this.className = `${this.className}-explosion`;

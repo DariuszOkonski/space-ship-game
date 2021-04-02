@@ -1,5 +1,5 @@
 import { SpaceShip } from './SpaceShip.js';
-import {enemiesSpeed, htmlClasses} from './utilities.js';
+import {domElements, enemiesSpeed, htmlClasses} from './utilities.js';
 import { Falcon } from './Falcon.js';
 import { Hawk } from './Hawk.js';
 import { Destroyer } from './Destroyer.js';
@@ -8,7 +8,8 @@ import { Destroyer } from './Destroyer.js';
 
 class Controller {
     spaceship = null;
-    enemies = []
+    enemies = [];
+    scores = null;
     intervalMissilesCleaner = null; // Remeber to clear interval
     intervalEnemyHit = null; //Remember to clear interval
     intervalSpaceShipHit = null; // Remeber to clea interval
@@ -30,7 +31,7 @@ class Controller {
         clearInterval(this.intervalMissilesCleaner);
         const halfScreen = window.innerWidth / 2;
         this.spaceship = new SpaceShip(0, halfScreen);
-
+        this.scores = 0;
         //...
     }
 
@@ -50,7 +51,7 @@ class Controller {
             this.spaceship.missiles.forEach((missile, missileIndex, missileArr) => {
                 const flyingMissile = {
                     alt: missile.y,
-                    peek: missile.x + 20
+                    peek: missile.x + (missile.htmlElement.clientWidth / 2)
                 }
 
                 this.enemies.forEach((enemy, enemyIndex, enemyArr) => {
@@ -66,6 +67,20 @@ class Controller {
                     if((flyingMissile.alt >= flyingEnemy.frontSide) 
                         && (flyingMissile.peek > flyingEnemy.leftSide) && (flyingMissile.peek < flyingEnemy.rightSide)) {
                             
+                            
+                            missile.explode();
+                            missileArr.splice(missileIndex, 1)
+                            
+                            // console.log(enemy.livesCount)
+                            enemy.processBeingHit(missile.damage)
+
+                            if(enemy.livesCount <= 0) {
+                                enemyArr.splice(enemyIndex, 1);
+                            }
+                            // console.log(this.enemies)
+                            this.scores += missile.damage;
+                            domElements.scores.innerText = `Scores: ${this.scores}`;
+
                     }
                 })
 
@@ -73,7 +88,7 @@ class Controller {
             })
 
 
-        }, 100);
+        }, 5);
     }
 
     checkSpaceShipHit() {
@@ -91,7 +106,7 @@ class Controller {
         const destroyer = new Destroyer(500, (window.innerHeight - 200));
         this.enemies.push(destroyer)
 
-        console.log(this.enemies)
+        // console.log(this.enemies)
     }
 
     

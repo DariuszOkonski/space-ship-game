@@ -1,12 +1,12 @@
 import { Ship } from './Ship.js';
-import {domElements, htmlClasses, spaceShipSpeeds, shipsLivesCount} from './utilities.js';
+import {domElements, htmlClasses, spaceShipSpeeds, shipsLivesCount, missileDamage} from './utilities.js';
 import {Missile} from './Missile.js';
 
 export class SpaceShip extends Ship {
     missiles = [];
     speedX = spaceShipSpeeds.regular;
-    rocketCount = 3;
-    trippleMissleCount = 10;
+    rocketCount = 25;
+    trippleMissleCount = 30;
     speedUpCounter = 0;
     htmlElement = null;
     movingLeft = false;
@@ -126,19 +126,19 @@ export class SpaceShip extends Ship {
 
 
     shootSingleMissile() {
-        this.createMissile('--missile-size', htmlClasses.missile, 1);
+        this.createMissile('--missile-size', htmlClasses.missile, missileDamage.missile);
     }
 
     shootRocketMissile() {
         this.updateRocketsCount();
-        this.createMissile('--rocket-size', htmlClasses.missileRocket, 3);
+        this.createMissile('--rocket-size', htmlClasses.missileRocket, missileDamage.rocket);
 
     }
 
     
     shootTrippleMissile() {
         this.updateTripleMissilesCount();
-        this.createMissile('--missile-size', htmlClasses.missile, 1, true);
+        this.createMissile('--missile-size', htmlClasses.missile, missileDamage.missile, true);
     }
 
     createMissile(cssSizeVar, htmlClass, damage, isTriple=false) {
