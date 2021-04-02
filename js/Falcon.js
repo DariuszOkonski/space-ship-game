@@ -1,10 +1,9 @@
 import { Enemy } from './Enemy.js';
-import { enemiesSpeed, htmlClasses } from './utilities.js';
+import { enemiesSpeed, htmlClasses, shipsLivesCount } from './utilities.js';
 
 export class Falcon extends Enemy {
     constructor(x, y) {
-        let livesCount = 1;
-        super(x, y, livesCount, htmlClasses.falcon, enemiesSpeed.falcon)
+        super(x, y, shipsLivesCount.falcon, htmlClasses.falcon, enemiesSpeed.falcon)
         this.htmlElement = null;
     }   
 

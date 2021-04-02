@@ -26,7 +26,7 @@ class Controller {
         // set spaceship
         clearInterval(this.intervalMissilesCleaner);
         const halfScreen = window.innerWidth / 2;
-        this.spaceship = new SpaceShip(0, halfScreen, 3, htmlClasses.spaceship);
+        this.spaceship = new SpaceShip(0, halfScreen);
 
         //...
     }

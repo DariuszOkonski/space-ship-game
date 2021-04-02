@@ -1,5 +1,5 @@
 import { Ship } from './Ship.js';
-import {domElements, htmlClasses, spaceShipSpeeds} from './utilities.js';
+import {domElements, htmlClasses, spaceShipSpeeds, shipsLivesCount} from './utilities.js';
 import {Missile} from './Missile.js';
 
 export class SpaceShip extends Ship {
@@ -13,8 +13,8 @@ export class SpaceShip extends Ship {
     movingRight = false;
     // intervalMovement = null;
 
-    constructor(x, y, livesCount, className) {
-        super(x, y, livesCount, className)
+    constructor(x, y) {
+        super(x, y, shipsLivesCount.spaceship, htmlClasses.spaceship)
 
         this.initialization()
     }
