@@ -1,6 +1,8 @@
 import { SpaceShip } from './SpaceShip.js';
 import {enemiesSpeed, htmlClasses} from './utilities.js';
 import { Falcon } from './Falcon.js';
+import { Hawk } from './Hawk.js';
+import { Destroyer } from './Destroyer.js';
 
 
 
@@ -42,13 +44,13 @@ class Controller {
 
     enemyGenerator() {
         // random y
-        const falcon = new Falcon(200, 0, 1, htmlClasses.falcon, enemiesSpeed.falcon);
+        const falcon = new Falcon(200, 0);
         this.enemies.push(falcon)
         
-        const hawk = new Falcon(300, 0, 3, htmlClasses.hawk, enemiesSpeed.hawk);
+        const hawk = new Hawk(300, 0);
         this.enemies.push(hawk)
 
-        const destroyer = new Falcon(500, 0, 7, htmlClasses.destroyer, enemiesSpeed.destroyer);
+        const destroyer = new Destroyer(500, 0);
         this.enemies.push(destroyer)
 
         console.log(this.enemies)
