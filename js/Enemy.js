@@ -13,7 +13,8 @@ export class Enemy extends Ship {
         this.htmlElement = document.createElement('div')
         
         this.htmlElement.classList.add(this.className)
-        this.htmlElement.style.top = 0;
+        // this.htmlElement.style.top = 0;
+        this.htmlElement.style.bottom = `${window.innerHeight - 200}px`;
         // const halfScreen = (window.innerWidth / 2) - (this.htmlElement.clientWidth / 2);
         
         // this.htmlElement.style.left = this.x;

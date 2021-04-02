@@ -28,15 +28,14 @@ export class Missile {
         this.htmlElement.classList.add(this.className);
         
         
+        this.htmlElement.style.left = `${this.x}px`;
+        this.htmlElement.style.bottom = `${this.y}px`;
         
         if (!this.isEnemyMissile) {
-            this.htmlElement.style.left = `${this.x}px`;
-            this.htmlElement.style.bottom = `${this.y}px`;
             this.moveUp();
         }
         else {
-            this.htmlElement.style.left = `${this.x}px`;
-            this.htmlElement.style.top = `${this.y}px`;
+           this.moveDown();
         }
         
         domElements.container.appendChild(this.htmlElement);
