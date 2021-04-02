@@ -182,18 +182,4 @@ export class SpaceShip extends Ship {
             domElements.engine.innerText = '0.0';
         }, timeout);
     }
-
-
-    // explode() {
-    //     // this.className.remove('spaceship');
-    //     // this.className.add('spaceship-explosion');
-    //     this.className = htmlClasses.spaceshipExplosion;
-    //     this.htmlElement.classList.remove(htmlClasses.spaceship);
-    //     this.htmlElement.classList.add(htmlClasses.spaceshipExplosion);
-    //     setTimeout(() => {
-    //         this.htmlElement.remove();
-    //         clearInterval(this.intervalMovement);
-    //     }, 1000);
-    // }
-
 }

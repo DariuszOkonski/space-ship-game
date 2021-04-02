@@ -7,25 +7,29 @@ export class Enemy extends Ship {
         this.speedY = speedY;
         this.shootingUnit = false;
 
+        this.initialization();
+    }
+    
+    initialization() {
         this.buildEnemy();
+        this.moveDown();
     }
 
     buildEnemy() {
         this.htmlElement = document.createElement('div')
         
         this.htmlElement.classList.add(this.className)
-        // this.htmlElement.style.top = 0;
-        // this.htmlElement.style.bottom = `${window.innerHeight}px`;
         this.htmlElement.style.bottom = `${this.y}px`;
-        // const halfScreen = (window.innerWidth / 2) - (this.htmlElement.clientWidth / 2);
-        
-        // this.htmlElement.style.left = this.x;
         this.htmlElement.style.left = `${this.x}px`;
         domElements.container.appendChild(this.htmlElement);
     }   
 
     moveDown() {
-        this.y -= this.speedY /////
+        this.intervalMovement = setInterval(() => {
+            this.y -= this.speedY   
+            this.htmlElement.style.bottom = `${this.y}px`;
+            // console.log(this.y)         
+        }, 50);
     }
 
     remove() {

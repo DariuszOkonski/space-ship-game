@@ -13,7 +13,7 @@ class Controller {
     intervalMissilesCleaner = null; // Remeber to clear interval
     intervalEnemyHit = null; //Remember to clear interval
     intervalSpaceShipHit = null; // Remeber to clea interval
-    
+    intervalEnemiesHitBottom = null //Remember to clear interval
 
     constructor() {
         this.setGame();
@@ -24,6 +24,7 @@ class Controller {
         this.checkEnemyHit();   
         this.missileCleaningLoop();
         this.enemyGenerator();
+        this.enemiesCleaningLoop();
     }
 
     setGame() {
@@ -46,6 +47,25 @@ class Controller {
         }, 100);
     }
 
+    enemiesCleaningLoop() {
+        this.intervalEnemiesHitBottom = setInterval(() => {
+            this.enemies.forEach((enemy, index, arr) => {
+                if(enemy.y <= (0 - enemy.htmlElement.clientHeight)) {
+                    enemy.remove();
+                    arr.splice(index, 1);
+                    this.spaceship.livesCount--;
+                    domElements.hearts.innerText = this.spaceship.livesCount;
+                    domElements.container.classList.add('red');
+                    setTimeout(() => {
+                        domElements.container.classList.remove('red');
+                    }, 100);
+                }
+            });            
+        }, 100);
+
+    }
+
+
     checkEnemyHit() {
         this.intervalEnemyHit = setInterval(() => {
             this.spaceship.missiles.forEach((missile, missileIndex, missileArr) => {
@@ -56,6 +76,7 @@ class Controller {
 
                 this.enemies.forEach((enemy, enemyIndex, enemyArr) => {
                     let hitboxToleranceCorrection = enemy.x * 0.02;
+
                     const flyingEnemy = {
                         leftSide: enemy.x + hitboxToleranceCorrection, 
                         rightSide: enemy.x + enemy.htmlElement.clientWidth - hitboxToleranceCorrection,
@@ -80,16 +101,14 @@ class Controller {
                             // console.log(this.enemies)
                             this.scores += missile.damage;
                             domElements.scores.innerText = `Scores: ${this.scores}`;
-
                     }
+
                 })
-
-
             })
-
-
         }, 5);
     }
+
+
 
     checkSpaceShipHit() {
 

@@ -33,9 +33,9 @@ export const spaceShipSpeeds = {
 };
 
 export const enemiesSpeed = {
-    falcon: 10,
-    hawk: 20,
-    destroyer: 5,
+    falcon: 2,
+    hawk: 3,
+    destroyer: 1,
 }
 
 export const shipsLivesCount = {
