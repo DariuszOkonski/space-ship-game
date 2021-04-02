@@ -5,6 +5,7 @@ export class Enemy extends Ship {
     constructor(x, y, livesCount, className, speedY) {
         super(x, y, livesCount, className);
         this.speedY = speedY;
+        this.shootingUnit = false;
 
         this.buildEnemy();
     }
@@ -14,7 +15,8 @@ export class Enemy extends Ship {
         
         this.htmlElement.classList.add(this.className)
         // this.htmlElement.style.top = 0;
-        this.htmlElement.style.bottom = `${window.innerHeight - 200}px`;
+        // this.htmlElement.style.bottom = `${window.innerHeight}px`;
+        this.htmlElement.style.bottom = `${this.y}px`;
         // const halfScreen = (window.innerWidth / 2) - (this.htmlElement.clientWidth / 2);
         
         // this.htmlElement.style.left = this.x;
