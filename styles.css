@@ -253,10 +253,10 @@ body {
 
 .missile-rocket-explosion {
     position: absolute;   
-    width: 128px;
-    height: 128px;
+    width: 80px;
+    height: 80px;
     background-image: url('/img/missile-rocket-explosion.png');
-    animation: missile-rocket-explosion-animate var(--explosion-time) steps(10) infinite;
+    animation: missile-rocket-explosion-animate var(--explosion-time) steps(17) infinite;
 }
 
 
@@ -265,7 +265,7 @@ body {
         background-position-x: 0px;  
     }
     to {
-        background-position-x: -1280px;
+        background-position-x: -1360px;
     }
 }
 
