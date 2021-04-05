@@ -55,22 +55,21 @@ export class SpaceShip extends Ship {
     //     })
 
     allowShipActions() {
-        addEventListener('keydown', (event) => this.keyDownFunction(event));
+        addEventListener('keydown', this.keyDownFunction);
 
-        addEventListener('keyup', (event) => this.keyUpFunction(event));
+        addEventListener('keyup', this.keyUpFunction);
     }
-////////////
+
     forbidShipActions() {
         this.movingLeft = false;
         this.movingRight = false;
         clearInterval(this.intervalMovement);
-        // FOOKING EVENT LISTENERS TO CORRECT - STILL CAN SHOOT AFTER EXPLOSION
-        removeEventListener('keyup', (event) => this.keyUpFunction(event));
-        removeEventListener('keydown', (event) => this.keyDownFunction(event));
-///////////
+
+        removeEventListener('keyup', this.keyUpFunction);
+        removeEventListener('keydown', this.keyDownFunction);
     }
 
-    keyDownFunction(event) {
+    keyDownFunction = (event) => {
         switch (event.keyCode) {
                 case 37:
                     this.movingLeft = true;
@@ -82,7 +81,7 @@ export class SpaceShip extends Ship {
             }
     }
 
-    keyUpFunction(event) {
+    keyUpFunction = (event) => {
         switch (event.keyCode) {
             case 37:
                 // LEFT ARROW key - move left

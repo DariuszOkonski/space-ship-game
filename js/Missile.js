@@ -88,6 +88,7 @@ export class Missile {
     }
 
     getHitBox() {
+        let hitboxToleranceCorrection = enemy.x * 0.02;
         return {
             alt: this.y,
             peek: this.x + (this.htmlElement.clientWidth / 2)

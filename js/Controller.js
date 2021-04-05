@@ -114,7 +114,6 @@ class Controller {
                             if(enemy.livesCount <= 0) {
                                 enemyArr.splice(enemyIndex, 1);
                             }
-                    
                     }
                 })
             })
