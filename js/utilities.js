@@ -17,6 +17,7 @@ export const htmlClasses = {
 }
 
 export const domElements = {
+    body: document.querySelector('body'),
     container: document.getElementById('container'),
     modal: document.querySelector('[data-modal]'),
     endScore: document.querySelector('[data-end-score]'),

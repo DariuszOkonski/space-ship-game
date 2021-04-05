@@ -59,7 +59,7 @@ class Controller {
                     this.processEnemyHitBottom();
 
                     if (this.spaceship.livesCount <= 0) {
-                         //////
+                        this.spaceship.forbidShipActions();
                         this.spaceship.explode();
                         this.showGameOverScreen();
                     }
