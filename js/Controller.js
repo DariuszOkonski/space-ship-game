@@ -59,6 +59,9 @@ class Controller {
                     this.processEnemyHitBottom();
 
                     if (this.spaceship.livesCount <= 0) {
+                        clearInterval(this.intervalEnemiesHitBottom);
+                        clearInterval(this.intervalEnemyHit);
+                        // clearInterval(this.intervalMissilesCleaner);
                         this.spaceship.forbidShipActions();
                         this.spaceship.explode();
                         this.showGameOverScreen();
@@ -77,23 +80,6 @@ class Controller {
             domElements.container.classList.remove('red');
         }, 150);
     }
-
-    showGameOverScreen() {
-        setTimeout(() => {
-            domElements.endScore.innerText = this.scores;
-            domElements.modal.classList.remove('hide');
-        }, 1000);
-    }
-    // processEnemiesPassing(enemy, index, arr) {
-    //     enemy.remove();
-    //     arr.splice(index, 1);
-    //     this.spaceship.livesCount--;
-    //     domElements.hearts.innerText = this.spaceship.livesCount;
-    //     domElements.container.classList.add('red');
-    //     setTimeout(() => {
-    //         domElements.container.classList.remove('red');
-    //     }, 150);
-    // }
 
     checkEnemyHit() {
         this.intervalEnemyHit = setInterval(() => {
@@ -146,11 +132,31 @@ class Controller {
         // console.log(this.enemies)
     }
 
+
     
+    showGameOverScreen() {
+        setTimeout(() => {
+            domElements.endScore.innerText = this.scores;
+            domElements.modal.classList.remove('hide');
+            this.setNewGameButtonListener();
+        }, 1000);
+    }
+    
+    setNewGameButtonListener() {
+        domElements.newGameButton.addEventListener('click', () => {
+            window.location.reload(true);
+        })
+    }
+
 }
 
+function main() {
+    let controller = null;
+    controller = new Controller();
+    controller.initialization();
+}
+
+
 window.onload = () => {
-    const controller = new Controller();
-    controller.initialization()
-       
+    main();
 }

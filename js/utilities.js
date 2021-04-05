@@ -19,6 +19,7 @@ export const htmlClasses = {
 export const domElements = {
     body: document.querySelector('body'),
     container: document.getElementById('container'),
+    newGameButton: document.querySelector('[data-new-game-button]'),
     modal: document.querySelector('[data-modal]'),
     endScore: document.querySelector('[data-end-score]'),
     rocket: document.querySelector('[data-rocket]'),
