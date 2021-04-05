@@ -13,8 +13,8 @@ class Controller {
     intervalMissilesCleaner = null; // Remeber to clear interval
     intervalEnemyHit = null; //Remember to clear interval
     intervalSpaceShipHit = null; // Remeber to clea interval
-    intervalEnemiesHitBottom = null //Remember to clear interval
-
+    intervalEnemiesHitBottom = null; //Remember to clear interval
+    intervalEnemiesGenerator = null;
     constructor() {
         this.setGame();
         // this.initialization();
@@ -96,7 +96,9 @@ class Controller {
                             missile.explode();
                             missileArr.splice(missileIndex, 1)                            
                             enemy.processBeingHit(missile.damage)
+                            this.updateScores(missile.damage);
 
+                            
                             if(enemy.livesCount <= 0) {
                                 enemyArr.splice(enemyIndex, 1);
                             }
@@ -106,29 +108,56 @@ class Controller {
         }, 5);
     }
 
-
-
     checkSpaceShipHit() {
 
     }
+    updateScores(damage) {
+        this.scores += damage;
+        domElements.scores.innerText = `Scores: ${this.scores}`;
+    }
+    // enemyGenerator() {
+    //     // random y
+    //     const falcon = new Falcon(200, (window.innerHeight -100));
+    //     this.enemies.push(falcon)
+        
+    //     const hawk = new Hawk(300, (window.innerHeight - 150));
+    //     this.enemies.push(hawk)
+        
+    //     const hawk1 = new Hawk(500, (window.innerHeight - 250));
+    //     this.enemies.push(hawk1)
+        
+    //     const hawk2 = new Hawk(700, (window.innerHeight - 350));
+    //     this.enemies.push(hawk2)
+
+    //     const destroyer = new Destroyer(500, (window.innerHeight - 200));
+    //     this.enemies.push(destroyer)
+
+    //     // console.log(this.enemies)
+    // }
 
     enemyGenerator() {
         // random y
-        const falcon = new Falcon(200, (window.innerHeight -100));
-        this.enemies.push(falcon)
-        
-        const hawk = new Hawk(300, (window.innerHeight - 150));
-        this.enemies.push(hawk)
-        
-        const hawk1 = new Hawk(500, (window.innerHeight - 250));
-        this.enemies.push(hawk1)
-        
-        const hawk2 = new Hawk(700, (window.innerHeight - 350));
-        this.enemies.push(hawk2)
-
-        const destroyer = new Destroyer(500, (window.innerHeight - 200));
-        this.enemies.push(destroyer)
-
+       
+        this.intervalEnemiesGenerator = setInterval(() => {
+            let drawnNumber = Math.random();
+         
+            if (drawnNumber < 0.35) {
+                let drawnShipX = Math.floor(Math.random() * window.innerWidth) - 32; 
+                const falcon = new Falcon(drawnShipX, (window.innerHeight - 100));
+                    this.enemies.push(falcon)
+            }
+            else if (drawnNumber < 0.7){
+                let drawnShipX = Math.floor(Math.random() * window.innerWidth) - 48; 
+                const hawk = new Hawk(drawnShipX, (window.innerHeight - 100));
+                    this.enemies.push(hawk)
+            }
+            else {
+                let drawnShipX = Math.floor(Math.random() * window.innerWidth) - 64; 
+                const destroyer = new Destroyer(drawnShipX, (window.innerHeight - 100));
+                    this.enemies.push(destroyer)
+            }
+           
+        }, 2000);
         // console.log(this.enemies)
     }
 

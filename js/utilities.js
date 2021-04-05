@@ -38,7 +38,7 @@ export const spaceShipSpeeds = {
 
 export const enemiesSpeed = {
     falcon: 2,
-    hawk: 10,
+    hawk: 6,
     destroyer: 1,
 }
 
