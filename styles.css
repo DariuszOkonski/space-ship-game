@@ -139,6 +139,25 @@ body {
     }
 }
 
+.missile-red {
+    position: absolute;
+    z-index:1;
+    width: var(--missile-size);
+    height: var(--missile-size);
+    background-image: url('/img/missile-red.png');
+    animation: missile-animate var(--animation-time) steps(2) infinite;
+}
+
+
+@keyframes missile-red-animate {
+    from {
+        background-position-x: 0px;  
+    }
+    to {
+        background-position-x: 80px;
+    }
+}
+
 
 .missile-rocket {
     position: absolute;    
@@ -233,7 +252,8 @@ body {
 
 
 .missile-explosion {
-    position: absolute;    
+    position: absolute;
+    z-index: 101;    
     width: 40px;
     height: 40px;
     background-image: url('/img/missile-explosion.png');
@@ -247,6 +267,27 @@ body {
     }
     to {
         background-position-x: 240px;
+    }
+}
+
+
+
+.missile-red-explosion {
+    position: absolute;
+    z-index: 101;    
+    width: 40px;
+    height: 40px;
+    background-image: url('/img/missile-red-explosion.png');
+    animation: missile-red-explosion-animate var(--explosion-time) steps(5) infinite;
+}
+
+
+@keyframes missile-red-explosion-animate {
+    from {
+        background-position-x: 0px;  
+    }
+    to {
+        background-position-x: 320px;
     }
 }
 

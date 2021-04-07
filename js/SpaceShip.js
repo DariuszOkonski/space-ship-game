@@ -1,6 +1,6 @@
 import { Ship } from './Ship.js';
-import {domElements, htmlClasses, spaceShipSpeeds, shipsLivesCount, missileDamage} from './utilities.js';
-import {Missile} from './Missile.js';
+import {domElements, htmlClasses, spaceShipSpeeds, shipsLivesCount, missileDamage, imagesURLs} from './utilities.js';
+
 
 export class SpaceShip extends Ship {
     missiles = [];
@@ -11,6 +11,8 @@ export class SpaceShip extends Ship {
     htmlElement = null;
     movingLeft = false;
     movingRight = false;
+    rocketCannonOverheated = false;
+    tripleMissilesCannonsOverheated = false;
 
     constructor(x, y) {
         super(x, y, shipsLivesCount.spaceship, htmlClasses.spaceship)
@@ -141,34 +143,22 @@ export class SpaceShip extends Ship {
 
 
     shootSingleMissile() {
-        this.createMissile('--missile-size', htmlClasses.missile, missileDamage.missile);
+        this.createMissile('--missile-size',
+                            htmlClasses.missile,
+                            missileDamage.missile);
     }
 
     shootRocketMissile() {
-        this.updateRocketsCount();
-        this.createMissile('--rocket-size', htmlClasses.missileRocket, missileDamage.rocket);
-
-    }
-
-    
-    shootTrippleMissile() {
-        this.updateTripleMissilesCount();
-        this.createMissile('--missile-size', htmlClasses.missile, missileDamage.missile, true);
-    }
-
-    createMissile(cssSizeVar, htmlClass, damage, isTriple=false) {
-        const missileSize = parseInt(getComputedStyle(this.htmlElement).getPropertyValue(cssSizeVar));
-        const xCoord = this.x + this.htmlElement.clientWidth/2 - missileSize/2
-        const yCoord = 0 + this.htmlElement.clientHeight/2;
-        const missile = new Missile(xCoord, yCoord, htmlClass, false, damage);
-        this.missiles.push(missile);
-        
-        if (isTriple){
-            const leftMissile =  new Missile(xCoord - 42, yCoord-20, htmlClass, false, damage);
-            const rightMissile =  new Missile(xCoord + 42, yCoord-20, htmlClass, false, damage);
-            this.missiles.push(leftMissile);
-            this.missiles.push(rightMissile);
+        if (!this.rocketCannonOverheated) {
+            this.updateRocketsCount();
+            this.createMissile(
+                '--rocket-size',
+                htmlClasses.missileRocket,
+                missileDamage.rocket);
+            this.cooldownRocketCannon();
         }
+        
+
     }
 
     updateRocketsCount() {
@@ -176,9 +166,43 @@ export class SpaceShip extends Ship {
         domElements.rocket.innerText = `${this.rocketCount}`;
     }
 
+    cooldownRocketCannon() {
+        this.rocketCannonOverheated = true;
+        domElements.rocketImg.src = imagesURLs.rocketCannonsOverheated;
+        setTimeout(() => {
+            domElements.rocketImg.src = imagesURLs.bonusRocketReady;
+            this.rocketCannonOverheated = false;
+        }, 3000);
+    }
+
+
+    shootTrippleMissile() {
+        if (!this.tripleMissilesCannonsOverheated) {
+            this.updateTripleMissilesCount();
+            this.createMissile('--missile-size',
+                                htmlClasses.missile,
+                                missileDamage.missile,
+                                false,
+                                true);
+                
+            if (this.missiles.length > 21) {
+                this.coolDownTripleMissilesCannons();
+            }
+        }
+    }
+
     updateTripleMissilesCount() {
         this.trippleMissleCount--;
         domElements.tripleMissile.innerText = `${this.trippleMissleCount}`;
+    }
+
+    coolDownTripleMissilesCannons() {
+        this.tripleMissilesCannonsOverheated = true;
+        domElements.tripleMissileImg.src = imagesURLs.tripleMissileCannonsOverheated;
+        setTimeout(() => {
+            domElements.tripleMissileImg.src = imagesURLs.bonusTripleMissileReady;
+            this.tripleMissilesCannonsOverheated = false;
+        }, 3000);
     }
 
     collectSpeedUp(timeout) {

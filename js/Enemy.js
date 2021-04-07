@@ -33,18 +33,9 @@ export class Enemy extends Ship {
     }
 
     remove() {
+        clearInterval(this.intervalMovement);
         this.htmlElement.classList.remove(this.className);
-        this.htmlElement.remove()   
-        clearInterval(this.intervalMovement)
-    }
-
-    getHitBox() {
-        let hitboxToleranceCorrection = this.x * 0.02;
-        return {
-            leftSide: this.x + hitboxToleranceCorrection, 
-            rightSide: this.x + this.htmlElement.clientWidth - hitboxToleranceCorrection,
-            frontSide: this.y
-        }
+        this.htmlElement.remove();
     }
 
 }
