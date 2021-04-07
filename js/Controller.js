@@ -42,39 +42,67 @@ class Controller {
         //...
     }
     
+    checkEnemyHit() {
+        this.intervalEnemyHit = setInterval(() => {
+            this.spaceship.missiles.forEach((missile, missileIndex, missileArr) => {
+                const missileHitBox = missile.getHitBox();
+
+                this.enemies.forEach((enemy, enemyIndex, enemyArr) => {
+                    const enemyHitBox = enemy.getHitBox();
+                    
+                    if (this.isMissileInHitBox(missileHitBox, enemyHitBox)) {
+                        
+                        this.processHittingOpponentShip(missile, missileArr, missileIndex, enemy);
+                        this.updateScores(missile.damage);
+                        
+                        if(enemy.livesCount <= 0) {
+                            enemyArr.splice(enemyIndex, 1);
+                        }
+                    }
+                })
+            })
+        }, 5);
+    }
+
     missileCleaningLoop() {
         this.intervalMissilesCleaner = setInterval(() => {
-            this.spaceship.missiles.forEach((missile, index, arr) => {
-                if (missile.y >= window.innerHeight) {
-                    missile.remove();
-                    arr.splice(index, 1);
-                }
-            });
-    
-            this.enemies.forEach(enemy => {
-                
-                if (enemy.shootingUnit) {
-                    enemy.missiles.forEach((missile, index, arr) => {               
-                        const spaceShipHitBox = this.spaceship.getHitBox();
-                        const enemyMissileHitBox = missile.getHitBox();
-                        if (this.isMissileInHitBox(enemyMissileHitBox, spaceShipHitBox, true)) {
-                            this.processHittingOpponentShip(missile, arr, index, this.spaceship);
-                            this.displayPlayersLiveLossAnimation();
-    
-                            if (this.spaceship.livesCount <= 0) {
-                                this.processPlayersLoss();
-                            }
-                        }
-                        
-                        if (missile.y < 0) {
-                            missile.remove();
-                            arr.splice(index, 1);
-                        }
-                        
-                    });
-                }
-            });
+            this.checkSpaceshipsMissiles();
+            this.checkEnemiesMissiles();
         }, 200);
+    }
+
+    checkSpaceshipsMissiles() {
+        this.spaceship.missiles.forEach((missile, index, arr) => {
+            if (missile.y >= window.innerHeight) {
+                missile.remove();
+                arr.splice(index, 1);
+            }
+        });
+    }
+
+    checkEnemiesMissiles() {
+        this.enemies.forEach(enemy => {
+            if (enemy.shootingUnit) {
+                enemy.missiles.forEach((missile, index, arr) => {               
+                    const spaceShipHitBox = this.spaceship.getHitBox();
+                    const enemyMissileHitBox = missile.getHitBox();
+                    
+                    if (this.isMissileInHitBox(enemyMissileHitBox, spaceShipHitBox, true)) {
+                        this.processHittingOpponentShip(missile, arr, index, this.spaceship);
+                        this.displayPlayersLiveLossAnimation();
+
+                        if (this.spaceship.livesCount <= 0) {
+                            this.processPlayersLoss();
+                        }
+                    }
+                    
+                    if (missile.y < 0) {
+                        missile.remove();
+                        arr.splice(index, 1);
+                    }
+                });
+            }
+        });
     }
 
     enemiesCleaningLoop() {
@@ -117,28 +145,6 @@ class Controller {
         }, 150);
     }
 
-    checkEnemyHit() {
-        this.intervalEnemyHit = setInterval(() => {
-            this.spaceship.missiles.forEach((missile, missileIndex, missileArr) => {
-                const missileHitBox = missile.getHitBox();
-
-                this.enemies.forEach((enemy, enemyIndex, enemyArr) => {
-                    const enemyHitBox = enemy.getHitBox();
-                    
-                    if (this.isMissileInHitBox(missileHitBox, enemyHitBox)) {
-                        
-                        this.processHittingOpponentShip(missile, missileArr, missileIndex, enemy);
-                        this.updateScores(missile.damage);
-                        
-                        if(enemy.livesCount <= 0) {
-                            enemyArr.splice(enemyIndex, 1);
-                        }
-                    }
-                })
-            })
-        }, 5);
-    }
-         
     processHittingOpponentShip(missile, missileArr, missileIndex, enemy) {
         missile.explode();
         enemy.processBeingHit(missile.damage)
