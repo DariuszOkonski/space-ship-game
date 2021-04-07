@@ -65,7 +65,7 @@ class Controller {
 
             this.bonuses.push(bonus);
             
-            this.bonuses.forEach((bonus, index, bonusArr) => {             
+            this.bonuses.forEach((bonus, index, bonusArr) => {            
                 
                 if(bonus.htmlElement == null) {
                     bonusArr.splice(index, 1);
