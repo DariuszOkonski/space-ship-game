@@ -15,6 +15,8 @@ class Controller {
     // intervalSpaceShipHit = null; // Remeber to clea interval
     intervalEnemiesHitBottom = null; //Remember to clear interval
     intervalEnemiesGenerator = null;
+    intervalBonusGenerator = null;
+
     constructor() {
         this.setGame();
         // this.initialization();

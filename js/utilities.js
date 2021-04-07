@@ -39,7 +39,12 @@ export const domElements = {
     scores: document.querySelector('[data-scores]')
 }
 
-
+export const bonusSpeed = {
+    hearts: 5,
+    engines: 3,
+    trippleMissile: 7,
+    rocketMissile: 6
+}
 
 export const spaceShipSpeeds = {
     regular: 5, 
