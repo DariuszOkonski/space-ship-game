@@ -183,17 +183,17 @@ class Controller {
             let drawnNumber = Math.random();
          
             if (drawnNumber < 0.35) {
-                let drawnShipX = Math.floor(Math.random() * window.innerWidth) - 64; 
+                let drawnShipX = Math.floor(Math.random() * window.innerWidth) - 32; 
                 const falcon = new Falcon(drawnShipX, (window.innerHeight - 100));
                     this.enemies.push(falcon)
             }
             else if (drawnNumber < 0.7){
-                let drawnShipX = Math.floor(Math.random() * window.innerWidth) - 96; 
+                let drawnShipX = Math.floor(Math.random() * window.innerWidth) - 48; 
                 const hawk = new Hawk(drawnShipX, (window.innerHeight - 100));
                     this.enemies.push(hawk)
             }
             else {
-                let drawnShipX = Math.floor(Math.random() * window.innerWidth) - 128; 
+                let drawnShipX = Math.floor(Math.random() * window.innerWidth) - 64; 
                 const destroyer = new Destroyer(drawnShipX, (window.innerHeight - 100));
                     this.enemies.push(destroyer)
             }
