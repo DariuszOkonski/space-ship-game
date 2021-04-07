@@ -310,18 +310,18 @@ body {
     }
 }
 
-.bonus-engine {
+/* .bonus-engine {
     position: absolute;
     top: 200px;
     left: 100px;
     width: 96px;
     height: 96px;
     background-image: url('/img/bonus-engine.png');
-}
+} */
 
 .bonus-heart {
     position: absolute;
-    top: 200px;
+    bottom: 200px;
     left: 200px;
     width: 96px;
     height: 96px;
@@ -330,11 +330,29 @@ body {
 
 .bonus-missile {
     position: absolute;
-    top: 200px;
+    bottom: 200px;
     left: 300px;
     width: 96px;
     height: 96px;
     background-image: url('/img/bonus-missile.png');
+}
+
+.bonus-three {
+    position: absolute;
+    bottom: 200px;
+    left: 400px;
+    width: 96px;
+    height: 96px;
+    background-image: url('/img/bonus-three.png');
+}
+
+.bonus-engine {
+    position: absolute;
+    bottom: 200px;
+    left: 500px;
+    width: 96px;
+    height: 96px;
+    background-image: url('/img/bonus-engine.png');
 }
 
 .status {
@@ -426,4 +444,9 @@ body {
      display: none;
  }
 
- 
+.bonus {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: red;
+} 

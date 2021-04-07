@@ -23,8 +23,8 @@ class Controller {
     initialization() {     
         this.checkEnemyHit();   
         this.missileCleaningLoop();
-        this.enemyGenerator();
-        this.enemiesCleaningLoop();
+        // this.enemyGenerator();
+        // this.enemiesCleaningLoop();
         
     }
 
