@@ -53,7 +53,7 @@ export const enemiesSpeed = {
 }
 
 export const shipsLivesCount = {
-    spaceship: 10,
+    spaceship: 2,
     falcon: 1,
     hawk: 3,
     destroyer: 7

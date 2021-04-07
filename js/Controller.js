@@ -12,7 +12,7 @@ class Controller {
     scores = null;
     intervalMissilesCleaner = null; // Remeber to clear interval
     intervalEnemyHit = null; //Remember to clear interval
-    intervalSpaceShipHit = null; // Remeber to clea interval
+    // intervalSpaceShipHit = null; // Remeber to clea interval
     intervalEnemiesHitBottom = null; //Remember to clear interval
     intervalEnemiesGenerator = null;
     constructor() {
@@ -81,7 +81,7 @@ class Controller {
 
     checkEnemiesMissiles() {
         this.enemies.forEach(enemy => {
-            if (enemy.shootingUnit) {
+            if (enemy.shootingUnit && this.spaceship) {
                 enemy.missiles.forEach((missile, index, arr) => {               
                     const spaceShipHitBox = this.spaceship.getHitBox();
                     const enemyMissileHitBox = missile.getHitBox();
