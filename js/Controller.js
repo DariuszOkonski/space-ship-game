@@ -39,7 +39,6 @@ class Controller {
         const positionX = window.innerWidth / 2;
         const positionY = 0;
         this.spaceship = new SpaceShip(positionX, positionY);
-        //...
     }
     
     checkEnemyHit() {
