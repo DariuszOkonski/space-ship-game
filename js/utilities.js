@@ -2,7 +2,7 @@ export const imagesURLs = {
     bonusRocketReady: "img/bonus-missile.png",
     bonusTripleMissileReady: "img/bonus-three.png",
     rocketCannonsOverheated: "img/bonus-missile-overheated.png",
-    tripleMissileCannonsOverheated: "img/bonus-missile-overheated.png",
+    tripleMissileCannonsOverheated: "img/bonus-three-overheated.png",
 }
 
 export const htmlClasses = {
