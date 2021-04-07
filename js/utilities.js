@@ -40,10 +40,10 @@ export const domElements = {
 }
 
 export const bonusSpeed = {
-    hearts: 5,
-    engines: 3,
-    trippleMissile: 7,
-    rocketMissile: 6
+    bonusHeart: 5,
+    bonusEngine: 3,
+    bonusThree: 7,
+    bonusMissile: 6
 }
 
 export const spaceShipSpeeds = {

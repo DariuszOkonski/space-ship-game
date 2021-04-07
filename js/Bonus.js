@@ -1,4 +1,4 @@
-import { domElements } from "./utilities";
+import { domElements, bonusSpeed, convertHtmlClassNameToPropertyName } from "./utilities.js";
 
 export class Bonus {
     constructor(className, bonusCount, speedY) {
@@ -7,8 +7,9 @@ export class Bonus {
         this.className = className;
         this.bonusCount = bonusCount;
         this.intervalMovement = null;
-        this.speedY = speedY;
+        this.speedY = bonusSpeed[convertHtmlClassNameToPropertyName(className)];
         this.htmlElement = null;
+        this.initialization();
     
     }
     
@@ -39,6 +40,12 @@ export class Bonus {
             this.y -= this.speedY;
             this.htmlElement.style.bottom = `${this.y}px`;
 
-        }, 1000);
+            if(this.y < 0) {
+                clearInterval(this.intervalMovement);
+                this.htmlElement.remove();
+                this.htmlElement = null;
+            }
+
+        }, 50);
     }
 }

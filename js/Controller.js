@@ -1,14 +1,16 @@
 import { SpaceShip } from './SpaceShip.js';
-import {domElements, enemiesSpeed, htmlClasses} from './utilities.js';
+import {bonusSpeed, domElements, enemiesSpeed, htmlClasses} from './utilities.js';
 import { Falcon } from './Falcon.js';
 import { Hawk } from './Hawk.js';
 import { Destroyer } from './Destroyer.js';
+import { Bonus } from './Bonus.js';
 
 
 
 class Controller {
     spaceship = null;
     enemies = [];
+    bonuses = [];
     scores = null;
     intervalMissilesCleaner = null; // Remeber to clear interval
     intervalEnemyHit = null; //Remember to clear interval
@@ -22,13 +24,15 @@ class Controller {
         // this.initialization();
     }
     
-    initialization() {     
+    initialization() {  
+        console.log('init')   
         this.checkEnemyHit();   
         this.missileCleaningLoop();
+        this.bonusGenerator();
         // this.enemyGenerator();
         // this.enemiesCleaningLoop();
         
-    }
+    }    
 
     setGame() {
         // set spaceship
@@ -36,6 +40,7 @@ class Controller {
         clearInterval(this.intervalEnemyHit);
         clearInterval(this.intervalSpaceShipHit);
         clearInterval(this.intervalEnemiesHitBottom);
+        clearInterval(this.intervalBonusGenerator);
         
         this.scores = 0;
         const positionX = window.innerWidth / 2;
@@ -43,6 +48,33 @@ class Controller {
         this.spaceship = new SpaceShip(positionX, positionY);
     }
     
+    bonusGenerator() {
+        this.intervalBonusGenerator = setInterval(() => {
+            const randomBonus = Math.random();
+
+            let bonus = null;
+            if(randomBonus < 0.25) {
+                bonus = new Bonus('bonus-heart', 1)
+            } else if (randomBonus < 0.5) {
+                bonus = new Bonus('bonus-engine', 5000)
+            } else if (randomBonus < 0.75) {
+                bonus = new Bonus('bonus-missile', 3)
+            } else {
+                bonus = new Bonus('bonus-three', 10)
+            }
+
+            this.bonuses.push(bonus);
+            
+            this.bonuses.forEach((bonus, index, bonusArr) => {             
+                
+                if(bonus.htmlElement == null) {
+                    bonusArr.splice(index, 1);
+                }
+            })
+
+        }, 2000);
+    }
+
     checkEnemyHit() {
         this.intervalEnemyHit = setInterval(() => {
             this.spaceship.missiles.forEach((missile, missileIndex, missileArr) => {
