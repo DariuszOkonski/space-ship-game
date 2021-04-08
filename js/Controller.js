@@ -221,7 +221,7 @@ class Controller {
     setStatsCountsInHtmlDivs() {
         domElements.hearts.innerText = `${this.spaceship.livesCount}`;
         domElements.rocket.innerText = `${this.spaceship.rocketCount}`;
-        domElements.tripleMissile.ierText = `${this.spaceship.trippleMissleCount}`;
+        domElements.tripleMissile.innerText = `${this.spaceship.trippleMissleCount}`;
         domElements.engine.innerText = `${this.spaceship.speedUpCounter}`;
     }
 
