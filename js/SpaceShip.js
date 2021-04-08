@@ -61,6 +61,14 @@ export class SpaceShip extends Ship {
         this.removeListeners();
     }
 
+    explode() {
+        this.forbidShipActions();
+        super.explode();
+    }
+
+
+    // Moving and actions functions ================
+    
     keyDownFunction = (event) => {
         switch (event.keyCode) {
                 case 37:
@@ -137,6 +145,8 @@ export class SpaceShip extends Ship {
     }
 
 
+    // Shooting functions ================
+
     shootSingleMissile() {
         this.createMissile('--missile-size',
                             htmlClasses.missile,
@@ -152,8 +162,6 @@ export class SpaceShip extends Ship {
                 missileDamage.rocket);
             this.cooldownRocketCannon();
         }
-        
-
     }
 
     updateRocketsCount() {
@@ -199,6 +207,9 @@ export class SpaceShip extends Ship {
             this.tripleMissilesCannonsOverheated = false;
         }, 3000);
     }
+
+
+    // Bonuses collecting functions ================
 
     collectSpeedUp(timeout) {
 
@@ -248,10 +259,5 @@ export class SpaceShip extends Ship {
                 this.collectTrippleMissile(bonus.bonusCount);
                 break;          
         }
-    }
-
-    explode() {
-        this.forbidShipActions();
-        super.explode();
     }
 }

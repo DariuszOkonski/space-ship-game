@@ -36,7 +36,6 @@ export class Ship {
     }
     
     getHitBox() {
-        // let hitboxToleranceCorrection = this.x * 0.02;
         return {
             leftSide: this.x + hitBoxCorrections[this.className].x, 
             rightSide: this.x + this.htmlElement.clientWidth - hitBoxCorrections[this.className].x,
@@ -51,11 +50,8 @@ export class Ship {
         this.className = `${this.className}-explosion`;
         this.htmlElement.classList.add(this.className);
        
-        // this.movingLeft = false;
-        // this.movingRight = false;
         setTimeout(() => {
             this.htmlElement.remove();
-            // clearInterval(this.intervalMovement);
         }, 1000);
     }
 }

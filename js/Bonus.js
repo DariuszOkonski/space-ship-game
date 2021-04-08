@@ -54,7 +54,6 @@ export class Bonus {
     }
 
     getHitBox() {
-        // let hitboxToleranceCorrection = this.x * 0.02;
         return {
             leftSide: this.x + hitBoxCorrections['bonus'].x, 
             rightSide: this.x + this.htmlElement.clientWidth - hitBoxCorrections['bonus'].x,

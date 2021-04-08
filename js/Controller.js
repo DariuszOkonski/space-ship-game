@@ -1,5 +1,5 @@
 import { SpaceShip } from './SpaceShip.js';
-import {bonusSpeed, domElements, enemiesSpeed, htmlClasses} from './utilities.js';
+import {domElements} from './utilities.js';
 import { Falcon } from './Falcon.js';
 import { Hawk } from './Hawk.js';
 import { Destroyer } from './Destroyer.js';
@@ -12,17 +12,15 @@ class Controller {
     enemies = [];
     bonuses = [];
     scores = null;
-    intervalMissilesCleaner = null; // Remeber to clear interval
-    intervalEnemyHit = null; //Remember to clear interval
-    // intervalSpaceShipHit = null; // Remeber to clea interval
-    intervalEnemiesHitBottom = null; //Remember to clear interval
+    intervalMissilesCleaner = null; 
+    intervalEnemyHit = null;
+    intervalEnemiesHitBottom = null; 
     intervalEnemiesGenerator = null;
     intervalBonusGenerator = null;
     intervalBonusCollision = null;
 
     constructor() {
         this.setGame();
-        // this.initialization();
     }
     
     initialization() {  
@@ -37,7 +35,6 @@ class Controller {
     }    
 
     setGame() {
-        // set spaceship
         clearInterval(this.intervalMissilesCleaner);
         clearInterval(this.intervalEnemyHit);
         clearInterval(this.intervalSpaceShipHit);
@@ -73,10 +70,11 @@ class Controller {
     checkBonusShipCollision() {
         this.intervalBonusCollision = setInterval(() => {
             this.bonuses.forEach((bonus, index, bonusArr) => {
+                
                 // remove bonus when below screen
                 if(bonus.htmlElement == null) {
                     bonusArr.splice(index, 1);
-                    // continue;
+                
                 } else if(this.isObjectInHitBox(bonus.getHitBox(), this.spaceship.getHitBox(), true)) {                   
 
                     this.spaceship.collectBonus(bonus);                    
@@ -197,9 +195,9 @@ class Controller {
         missileArr.splice(missileIndex, 1)                            
     }
 
-    isObjectInHitBox(movingObjectHitBox, shipHitBox, isEnemyShooting=false) {
+    isObjectInHitBox(movingObjectHitBox, shipHitBox, movingObjectFromTop=false) {
         let objectInShipHitBox = null;
-        if (!isEnemyShooting) {
+        if (!movingObjectFromTop) {
             objectInShipHitBox = 
                     (movingObjectHitBox.top >= shipHitBox.frontSide) && 
                     (movingObjectHitBox.rightSide >= shipHitBox.leftSide) && 
@@ -221,9 +219,7 @@ class Controller {
    
    
 
-    enemyGenerator() {
-        // random y
-       
+    enemyGenerator() {       
         this.intervalEnemiesGenerator = setInterval(() => {
             let drawnNumber = Math.random();
          

@@ -17,7 +17,6 @@ export class Missile {
         this.className = className;
         this.targetHit = false;
         this.initialization();
-
     }
 
     initialization(){
@@ -56,11 +55,6 @@ export class Missile {
         this.intrevalIndex = setInterval(() => {
             this.y += speed;
             this.htmlElement.style.bottom = `${this.y}px`;
-
-            // if(this.y >= window.innerHeight) {
-            //     this.remove();                
-            // }
-
         }, 10);
     }
 
@@ -87,7 +81,6 @@ export class Missile {
     }
 
     explode() {
-        // if(!this.targetHit) {
             clearInterval(this.intrevalIndex);
             this.targetHit = true;
             this.htmlElement.classList.remove(this.className);
@@ -96,11 +89,9 @@ export class Missile {
             setTimeout(() => {
                 this.htmlElement.remove();
             }, 1000);
-        // }
     }
 
     getHitBox() {
-        // let hitboxToleranceCorrection = this.x * 0.02;
         let topPointCorrection;
         let hitBoxCorrectionY;
         let convertedClassName = convertHtmlClassNameToPropertyName(this.className);

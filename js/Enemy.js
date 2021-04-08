@@ -28,7 +28,6 @@ export class Enemy extends Ship {
         this.intervalMovement = setInterval(() => {
             this.y -= this.speedY   
             this.htmlElement.style.bottom = `${this.y}px`;
-            // console.log(this.y)         
         }, 50);
     }
 

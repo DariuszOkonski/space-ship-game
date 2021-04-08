@@ -4,7 +4,6 @@ import { enemiesSpeed, htmlClasses, missileDamage, shipsLivesCount } from './uti
 export class Destroyer extends Enemy {
     constructor(x, y) {
         super(x, y, shipsLivesCount.destroyer, htmlClasses.destroyer, enemiesSpeed.destroyer)
-        // this.htmlElement = null;
         this.shootingUnit = true;
         this.missiles = [];
         this.intervalShooting = null;
