@@ -26,7 +26,6 @@ export class Ship {
         const yCoord = this.y + this.htmlElement.clientHeight/2;
         const missile = new Missile(xCoord, yCoord, htmlClass, isEnemies, damage);
         this.missiles.push(missile);
-        console.log(this);
         if (isTriple) {
             const leftMissile =  new Missile(xCoord - 42, yCoord-20, htmlClass, isEnemies, damage);
             const rightMissile =  new Missile(xCoord + 42, yCoord-20, htmlClass, isEnemies, damage);

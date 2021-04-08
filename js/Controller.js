@@ -241,6 +241,13 @@ class Controller {
         clearInterval(this.intervalEnemiesHitBottom);
         clearInterval(this.intervalBonusGenerator);
         clearInterval(this.intervalBonusCollision);
+        this.enemies.forEach(enemy => {
+            if (enemy.shootingUnit) {
+                setTimeout(() => {
+                    clearInterval(enemy.intervalShooting);
+                }, 5000);
+            }
+        });
         this.showGameOverScreen();
     }
 
