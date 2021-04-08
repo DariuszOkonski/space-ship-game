@@ -1,5 +1,5 @@
 import { SpaceShip } from './SpaceShip.js';
-import {domElements} from './utilities.js';
+import { bonusCount, domElements, htmlClasses, timeVariables, objectImgSizes } from './utilities.js';
 import { Falcon } from './Falcon.js';
 import { Hawk } from './Hawk.js';
 import { Destroyer } from './Destroyer.js';
@@ -24,20 +24,18 @@ class Controller {
     }
     
     initialization() {  
-        console.log('init')   
         this.checkEnemyHit();   
         this.missileCleaningLoop();
         this.bonusGenerator();
         this.enemyGenerator();
         this.enemiesCleaningLoop();
-        this.checkBonusShipCollision()
-        
+        this.checkBonusShipCollision();
     }    
 
     setGame() {
         clearInterval(this.intervalMissilesCleaner);
+        clearInterval(this.intervalEnemiesGenerator);
         clearInterval(this.intervalEnemyHit);
-        clearInterval(this.intervalSpaceShipHit);
         clearInterval(this.intervalEnemiesHitBottom);
         clearInterval(this.intervalBonusGenerator);
         clearInterval(this.intervalBonusCollision);
@@ -48,24 +46,74 @@ class Controller {
         this.spaceship = new SpaceShip(positionX, positionY);
     }
     
+    // Generators intervals setting
+    enemyGenerator() {       
+        this.intervalEnemiesGenerator = setInterval(() => {
+            let randomTimeout = Math.floor(Math.random() * 3) * 1000;
+            setTimeout(() => {
+                let drawnNumber = Math.random();
+                let enemyShip = null;
+                let drawnShipX = Math.floor(Math.random() * window.innerWidth);
+                let shipY = window.innerHeight - 100;
+
+                if (drawnNumber < 0.45) {
+                    enemyShip = new Falcon(drawnShipX - objectImgSizes.falcon/2, shipY);
+                }
+                else if (drawnNumber < 0.8){
+                    enemyShip = new Hawk(drawnShipX - objectImgSizes.hawk/2, shipY);
+                }
+                else {
+                    enemyShip = new Destroyer(drawnShipX - objectImgSizes.destroyer/2, shipY);
+                }
+                this.enemies.push(enemyShip)
+            }, randomTimeout);
+        }, timeVariables.enemiesGenerator);
+    }
+
     bonusGenerator() {
         this.intervalBonusGenerator = setInterval(() => {
             const randomBonus = Math.random();
 
             let bonus = null;
             if(randomBonus < 0.25) {
-                bonus = new Bonus('bonus-heart', 2)
-            } else if (randomBonus < 0.5) {
-                bonus = new Bonus('bonus-engine', 12000)
-            } else if (randomBonus < 0.75) {
-                bonus = new Bonus('bonus-missile', 5)
-            } else {
-                bonus = new Bonus('bonus-three', 15)
-            }
 
+                bonus = new Bonus(htmlClasses.bonusHeart, bonusCount.bonusHeart);
+            } else if (randomBonus < 0.5) {
+                
+                bonus = new Bonus(htmlClasses.bonusEngine, bonusCount.bonusEngine);
+            } else if (randomBonus < 0.75) {
+
+                bonus = new Bonus(htmlClasses.bonusMissile, bonusCount.bonusMissile);
+            } else {
+                
+                bonus = new Bonus(htmlClasses.bonusThree, bonusCount.bonusThree);
+            }
             this.bonuses.push(bonus);
-        }, 20000);
+        }, timeVariables.bonusGenerator);
     }
+
+    // Objects contacts checking and cleaning DOM intervals setting
+    enemiesCleaningLoop() {
+        this.intervalEnemiesHitBottom = setInterval(() => {
+            this.enemies.forEach((enemy, index, arr) => {
+                if(enemy.y <= (0 - enemy.htmlElement.clientHeight)) {                    
+                    enemy.remove();
+                    arr.splice(index, 1);
+                    this.processEnemyHitBottom();
+
+                    if (this.spaceship.livesCount <= 0) {
+                        this.processPlayersLoss();
+                    }
+                }
+            });            
+        }, 1000);
+    }
+
+    processEnemyHitBottom() {
+        this.spaceship.processBeingHit(1);
+        this.displayPlayersLiveLossAnimation();
+    }
+
 
     checkBonusShipCollision() {
         this.intervalBonusCollision = setInterval(() => {
@@ -82,8 +130,47 @@ class Controller {
                     bonus.remove();           
                 }
             })
-
         }, 20);   
+    }
+
+    missileCleaningLoop() {
+        this.intervalMissilesCleaner = setInterval(() => {
+            this.checkSpaceshipsMissiles();
+            this.checkEnemiesMissiles();
+        }, 200);
+    }
+
+    checkSpaceshipsMissiles() {
+        this.spaceship.missiles.forEach((missile, index, arr) => {
+            if (missile.y >= window.innerHeight) {
+                missile.remove();
+                arr.splice(index, 1);
+            }
+        });
+    }
+
+    checkEnemiesMissiles() {
+        this.enemies.forEach(enemy => {
+            if (enemy.shootingUnit && this.spaceship) {
+                enemy.missiles.forEach((missile, index, arr) => {               
+                    
+                    if (this.isObjectInHitBox(missile.getHitBox(), this.spaceship.getHitBox(), true)) {
+            
+                        this.processHittingOpponentShip(missile, arr, index, this.spaceship);
+                        this.displayPlayersLiveLossAnimation();
+
+                        if (this.spaceship.livesCount <= 0) {
+                            this.processPlayersLoss();
+                        }
+                    }
+                    
+                    if (missile.y < 0) {
+                        missile.remove();
+                        arr.splice(index, 1);
+                    }
+                });
+            }
+        });
     }
 
     checkEnemyHit() {
@@ -108,93 +195,13 @@ class Controller {
         }, 5);
     }
 
-    missileCleaningLoop() {
-        this.intervalMissilesCleaner = setInterval(() => {
-            this.checkSpaceshipsMissiles();
-            this.checkEnemiesMissiles();
-        }, 200);
-    }
-
-    checkSpaceshipsMissiles() {
-        this.spaceship.missiles.forEach((missile, index, arr) => {
-            if (missile.y >= window.innerHeight) {
-                missile.remove();
-                arr.splice(index, 1);
-            }
-        });
-    }
-
-    checkEnemiesMissiles() {
-        this.enemies.forEach(enemy => {
-            if (enemy.shootingUnit && this.spaceship) {
-                enemy.missiles.forEach((missile, index, arr) => {               
-                    const spaceShipHitBox = this.spaceship.getHitBox();
-                    const enemyMissileHitBox = missile.getHitBox();
-                    
-                    if (this.isObjectInHitBox(enemyMissileHitBox, spaceShipHitBox, true)) {
-                        this.processHittingOpponentShip(missile, arr, index, this.spaceship);
-                        this.displayPlayersLiveLossAnimation();
-
-                        if (this.spaceship.livesCount <= 0) {
-                            this.processPlayersLoss();
-                        }
-                    }
-                    
-                    if (missile.y < 0) {
-                        missile.remove();
-                        arr.splice(index, 1);
-                    }
-                });
-            }
-        });
-    }
-
-    enemiesCleaningLoop() {
-        this.intervalEnemiesHitBottom = setInterval(() => {
-            this.enemies.forEach((enemy, index, arr) => {
-                if(enemy.y <= (0 - enemy.htmlElement.clientHeight)) {                    
-                    enemy.remove();
-                    arr.splice(index, 1);
-                    this.processEnemyHitBottom();
-
-                    if (this.spaceship.livesCount <= 0) {
-                        this.processPlayersLoss();
-                    }
-                }
-            });            
-        }, 1000);
-
-    }
-
-
-    processEnemyHitBottom() {
-        this.spaceship.livesCount--;
-        this.displayPlayersLiveLossAnimation();
-    }
-
-    processPlayersLoss() {
-        clearInterval(this.intervalEnemiesHitBottom);
-        clearInterval(this.intervalEnemyHit);
-        clearInterval(this.intervalMissilesCleaner);
-        this.spaceship.forbidShipActions();
-        this.spaceship.explode();
-        this.showGameOverScreen();
-    }
-
-    displayPlayersLiveLossAnimation() {
-        domElements.hearts.innerText = this.spaceship.livesCount;
-        domElements.container.classList.add('red');
-        setTimeout(() => {
-            domElements.container.classList.remove('red');
-        }, 150);
-    }
-
     processHittingOpponentShip(missile, missileArr, missileIndex, enemy) {
         missile.explode();
-        enemy.processBeingHit(missile.damage)
-        missileArr.splice(missileIndex, 1)                            
+        enemy.processBeingHit(missile.damage);
+        missileArr.splice(missileIndex, 1);                       
     }
 
+    // Additional help functions
     isObjectInHitBox(movingObjectHitBox, shipHitBox, movingObjectFromTop=false) {
         let objectInShipHitBox = null;
         if (!movingObjectFromTop) {
@@ -210,40 +217,33 @@ class Controller {
         }
         return objectInShipHitBox
     }
-   
+
+
+
     updateScores(damage) {
         this.scores += damage;
         domElements.scores.innerText = `Scores: ${this.scores}`;
     }
 
-   
-   
 
-    enemyGenerator() {       
-        this.intervalEnemiesGenerator = setInterval(() => {
-            let drawnNumber = Math.random();
-         
-            if (drawnNumber < 0.45) {
-                let drawnShipX = Math.floor(Math.random() * window.innerWidth) - 32; 
-                const falcon = new Falcon(drawnShipX, (window.innerHeight - 100));
-                    this.enemies.push(falcon)
-            }
-            else if (drawnNumber < 0.8){
-                let drawnShipX = Math.floor(Math.random() * window.innerWidth) - 48; 
-                const hawk = new Hawk(drawnShipX, (window.innerHeight - 100));
-                    this.enemies.push(hawk)
-            }
-            else {
-                let drawnShipX = Math.floor(Math.random() * window.innerWidth) - 64; 
-                const destroyer = new Destroyer(drawnShipX, (window.innerHeight - 100));
-                    this.enemies.push(destroyer)
-            }
-           
-        }, 3000);
+    displayPlayersLiveLossAnimation() {
+        domElements.hearts.innerText = this.spaceship.livesCount;
+        domElements.container.classList.add('red');
+        setTimeout(() => {
+            domElements.container.classList.remove('red');
+        }, 150);
     }
 
+    processPlayersLoss() {
+        clearInterval(this.intervalMissilesCleaner);
+        clearInterval(this.intervalEnemyHit);
+        clearInterval(this.intervalEnemiesGenerator)
+        clearInterval(this.intervalEnemiesHitBottom);
+        clearInterval(this.intervalBonusGenerator);
+        clearInterval(this.intervalBonusCollision);
+        this.showGameOverScreen();
+    }
 
-    
     showGameOverScreen() {
         setTimeout(() => {
             domElements.endScore.innerText = this.scores;

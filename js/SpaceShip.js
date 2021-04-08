@@ -1,5 +1,5 @@
 import { Ship } from './Ship.js';
-import {domElements, htmlClasses, spaceShipSpeeds, shipsLivesCount, missileDamage, imagesURLs} from './utilities.js';
+import {domElements, htmlClasses, spaceShipSpeeds, shipsLivesCount, missileDamage, imagesURLs, timeVariables} from './utilities.js';
 
 
 export class SpaceShip extends Ship {
@@ -175,7 +175,7 @@ export class SpaceShip extends Ship {
         setTimeout(() => {
             domElements.rocketImg.src = imagesURLs.bonusRocketReady;
             this.rocketCannonOverheated = false;
-        }, 1500);
+        }, timeVariables.spaceshipRocketCooldown);
     }
 
 
@@ -205,7 +205,7 @@ export class SpaceShip extends Ship {
         setTimeout(() => {
             domElements.tripleMissileImg.src = imagesURLs.bonusTripleMissileReady;
             this.tripleMissilesCannonsOverheated = false;
-        }, 3000);
+        }, timeVariables.spaceshipTripleMissileCooldown);
     }
 
 

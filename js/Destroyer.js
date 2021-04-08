@@ -1,5 +1,5 @@
 import { Enemy } from './Enemy.js';
-import { enemiesSpeed, htmlClasses, missileDamage, shipsLivesCount } from './utilities.js';
+import { enemiesSpeed, htmlClasses, missileDamage, shipsLivesCount, timeVariables } from './utilities.js';
 
 export class Destroyer extends Enemy {
     constructor(x, y) {
@@ -25,7 +25,7 @@ export class Destroyer extends Enemy {
                 this.shootSingleMissile();    
             }, Math.random() * 1200);
             
-        }, 2000);
+        }, timeVariables.destroyerShooting);
     }
 
     remove() {

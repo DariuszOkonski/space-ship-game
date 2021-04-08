@@ -1,8 +1,20 @@
+
+// HTML RELATED OBJECTS
 export const imagesURLs = {
     bonusRocketReady: "img/bonus-missile.png",
     bonusTripleMissileReady: "img/bonus-three.png",
     rocketCannonsOverheated: "img/bonus-missile-overheated.png",
     tripleMissileCannonsOverheated: "img/bonus-three-overheated.png",
+}
+
+export const objectImgSizes = {
+    spaceship: 96,
+    destroyer: 128,
+    hawk: 96,
+    falcon: 64,
+    missile: 40,
+    missileRocket: 80,
+    bonus: 96
 }
 
 export const htmlClasses = {
@@ -40,11 +52,22 @@ export const domElements = {
     scores: document.querySelector('[data-scores]')
 }
 
-export const bonusSpeed = {
-    bonusHeart: 5,
-    bonusEngine: 3,
-    bonusThree: 7,
-    bonusMissile: 6
+// GENERATORS INTERVALS
+export const timeVariables = {
+    enemiesGenerator: 2000,
+    bonusGenerator: 20000,
+    destroyerShooting: 2000,
+    spaceshipTripleMissileCooldown: 3000,
+    spaceshipRocketCooldown: 1500,
+
+}
+
+// SHIPS
+export const shipsLivesCount = {
+    spaceship: 3,
+    falcon: 1,
+    hawk: 3,
+    destroyer: 7
 }
 
 export const spaceShipSpeeds = {
@@ -58,13 +81,7 @@ export const enemiesSpeed = {
     destroyer: 1,
 }
 
-export const shipsLivesCount = {
-    spaceship: 3,
-    falcon: 1,
-    hawk: 3,
-    destroyer: 7
-}
-
+// MISSILES
 export const missilesSpeeds = {
     missile: 5,
     tripleMissile: 3,
@@ -76,7 +93,22 @@ export const missileDamage = {
     rocket: 3 
 }
 
+// BONUSES
+export const bonusSpeed = {
+    bonusHeart: 5,
+    bonusEngine: 3,
+    bonusThree: 7,
+    bonusMissile: 6
+}
 
+export const bonusCount = {
+    bonusHeart: 2,
+    bonusEngine: 12000,
+    bonusThree: 5,
+    bonusMissile: 10
+}
+
+// HITBOX CORRECTIONS
 export const hitBoxCorrections = {
     falcon: {x: 2, y: 20},
     hawk: {x: 6, y: 40},
@@ -87,6 +119,8 @@ export const hitBoxCorrections = {
     spaceship: {x:4, y: 96},
     bonus: {x: 15, y: 15}
 }
+
+
 
 export function convertHtmlClassNameToPropertyName(htmlClassString) {
     let words = htmlClassString.split('-');
