@@ -55,7 +55,7 @@ export const domElements = {
 // GENERATORS INTERVALS
 export const timeVariables = {
     enemiesGenerator: 2000,
-    bonusGenerator: 20000,
+    bonusGenerator: 15000,
     destroyerShooting: 2000,
     spaceshipTripleMissileCooldown: 3000,
     spaceshipRocketCooldown: 1500,

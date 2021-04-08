@@ -1,4 +1,4 @@
-import { domElements, bonusSpeed, convertHtmlClassNameToPropertyName, hitBoxCorrections } from "./utilities.js";
+import { domElements, bonusSpeed, convertHtmlClassNameToPropertyName, hitBoxCorrections, objectImgSizes } from "./utilities.js";
 
 export class Bonus {
     constructor(className, bonusCount, speedY) {
@@ -40,7 +40,7 @@ export class Bonus {
             this.y -= this.speedY;
             this.htmlElement.style.bottom = `${this.y}px`;
 
-            if(this.y < 0) {
+            if(this.y < 0 - objectImgSizes.bonus) {
                 this.remove()
             }
 

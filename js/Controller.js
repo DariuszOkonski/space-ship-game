@@ -163,7 +163,6 @@ class Controller {
                             this.processPlayersLoss();
                         }
                     }
-                    
                     if (missile.y < 0) {
                         missile.remove();
                         arr.splice(index, 1);
@@ -203,21 +202,18 @@ class Controller {
 
     // Additional help functions
     isObjectInHitBox(movingObjectHitBox, shipHitBox, movingObjectFromTop=false) {
-        let objectInShipHitBox = null;
-        if (!movingObjectFromTop) {
-            objectInShipHitBox = 
-                    (movingObjectHitBox.top >= shipHitBox.frontSide) && 
-                    (movingObjectHitBox.rightSide >= shipHitBox.leftSide) && 
-                    (movingObjectHitBox.leftSide <= shipHitBox.rightSide)
-        } else {
-            objectInShipHitBox = 
-                    (movingObjectHitBox.top <= shipHitBox.frontSide) && 
-                    (movingObjectHitBox.rightSide >= shipHitBox.leftSide) && 
-                    (movingObjectHitBox.leftSide <= shipHitBox.rightSide)
-        }
-        return objectInShipHitBox
-    }
+        const movingOjbectBetweenLeftAndRightX = 
+            (movingObjectHitBox.rightSide >= shipHitBox.leftSide) && 
+            (movingObjectHitBox.leftSide <= shipHitBox.rightSide)
+        let movingObjectPassedFrontSideY = null;
 
+        if (!movingObjectFromTop) {
+            movingObjectPassedFrontSideY = (movingObjectHitBox.top >= shipHitBox.frontSide)  
+        } else {
+            movingObjectPassedFrontSideY = (movingObjectHitBox.top <= shipHitBox.frontSide)          
+        }
+        return movingOjbectBetweenLeftAndRightX && movingObjectPassedFrontSideY
+    }
 
 
     updateScores(damage) {
