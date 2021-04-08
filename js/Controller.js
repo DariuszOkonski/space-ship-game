@@ -41,9 +41,11 @@ class Controller {
         clearInterval(this.intervalBonusCollision);
         
         this.scores = 0;
-        const positionX = window.innerWidth / 2;
+        const positionX = (window.innerWidth / 2) - (objectImgSizes.spaceship / 2);
         const positionY = 0;
+        
         this.spaceship = new SpaceShip(positionX, positionY);
+        this.setStatsCountsInHtmlDivs();
     }
     
     // Generators intervals setting
@@ -57,13 +59,13 @@ class Controller {
                 let shipY = window.innerHeight - 100;
 
                 if (drawnNumber < 0.45) {
-                    enemyShip = new Falcon(drawnShipX - objectImgSizes.falcon/2, shipY);
+                    enemyShip = new Falcon(drawnShipX - objectImgSizes.falcon /2, shipY);
                 }
                 else if (drawnNumber < 0.8){
-                    enemyShip = new Hawk(drawnShipX - objectImgSizes.hawk/2, shipY);
+                    enemyShip = new Hawk(drawnShipX - objectImgSizes.hawk / 2, shipY);
                 }
                 else {
-                    enemyShip = new Destroyer(drawnShipX - objectImgSizes.destroyer/2, shipY);
+                    enemyShip = new Destroyer(drawnShipX - objectImgSizes.destroyer / 2, shipY);
                 }
                 this.enemies.push(enemyShip)
             }, randomTimeout);
@@ -125,7 +127,8 @@ class Controller {
                 
                 } else if(this.isObjectInHitBox(bonus.getHitBox(), this.spaceship.getHitBox(), true)) {                   
 
-                    this.spaceship.collectBonus(bonus);                    
+                    this.spaceship.collectBonus(bonus);
+                    this.updateBonusCount(bonus.className);              
                     bonusArr.splice(index, 1);         
                     bonus.remove();           
                 }
@@ -215,12 +218,33 @@ class Controller {
         return movingOjbectBetweenLeftAndRightX && movingObjectPassedFrontSideY
     }
 
+    setStatsCountsInHtmlDivs() {
+        domElements.hearts.innerText = `${this.spaceship.livesCount}`;
+        domElements.rocket.innerText = `${this.spaceship.rocketCount}`;
+        domElements.tripleMissile.ierText = `${this.spaceship.trippleMissleCount}`;
+        domElements.engine.innerText = `${this.spaceship.speedUpCounter}`;
+    }
 
     updateScores(damage) {
         this.scores += damage;
         domElements.scores.innerText = `Scores: ${this.scores}`;
     }
 
+    updateBonusCount(bonusClassName) {
+        switch (bonusClassName) {
+            case htmlClasses.bonusHeart:
+                domElements.hearts.innerText = `${this.spaceship.livesCount}`;
+                break;
+        
+            case htmlClasses.bonusThree:
+                domElements.tripleMissile.innerText = `${this.spaceship.trippleMissleCount}`;                
+                break;
+        
+            case htmlClasses.bonusMissile:
+                domElements.rocket.innerText = `${this.spaceship.rocketCount}`;
+                break;
+        }
+    }
 
     displayPlayersLiveLossAnimation() {
         domElements.hearts.innerText = this.spaceship.livesCount;

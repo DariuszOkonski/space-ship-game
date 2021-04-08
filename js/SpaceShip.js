@@ -1,5 +1,5 @@
 import { Ship } from './Ship.js';
-import {domElements, htmlClasses, spaceShipSpeeds, shipsLivesCount, missileDamage, imagesURLs, timeVariables} from './utilities.js';
+import {domElements, htmlClasses, spaceShipSpeeds, shipsLivesCount, missileDamage, imagesURLs, timeVariables, objectImgSizes} from './utilities.js';
 
 
 export class SpaceShip extends Ship {
@@ -27,19 +27,13 @@ export class SpaceShip extends Ship {
     }
 
     buildShip() {
-        this.htmlElement = document.createElement('div')
-        
+        this.htmlElement = document.createElement('div');
         this.htmlElement.classList.add(this.className)
-        this.htmlElement.style.bottom = 0;
-        const halfScreen = (window.innerWidth / 2) - (this.htmlElement.clientWidth / 2);
         
-        this.htmlElement.style.left = `${halfScreen}px`
-        this.x = halfScreen;
-        domElements.rocket.innerText = `${this.rocketCount}`;
-        domElements.hearts.innerText = `${this.livesCount}`;
-        domElements.tripleMissile.innerText = `${this.trippleMissleCount}`;
-        domElements.container.appendChild(this.htmlElement);
-        
+        this.htmlElement.style.bottom = `${this.y}px`;
+        this.htmlElement.style.left = `${this.x}px`;
+
+        domElements.container.appendChild(this.htmlElement);       
     }
 
     removeListeners() {
@@ -96,24 +90,19 @@ export class SpaceShip extends Ship {
             case 32:
                 // SPACE key - single shot
                 this.shootSingleMissile();
-                console.log(this.missiles);
                 break;
 
             case 81:
                 // Q key - rocket shot
                 if (this.rocketCount > 0) {
                     this.shootRocketMissile();
-                    console.log('missile rocket (^ arrow up)')
-                }
-                break;
+                } break;
 
             case 87:
                 // W key - tripple missile shot
                 if (this.trippleMissleCount > 0) {
                     this.shootTrippleMissile();
-                    console.log('triple shot');
-                }
-                break;
+                } break;
         }
     }
 
@@ -129,7 +118,7 @@ export class SpaceShip extends Ship {
 
 
     moveLeft() {
-        if (this.x > 0) {
+        if (this.x > 0 - objectImgSizes.spaceship / 2) {
             this.x -= this.speedX;
             this.htmlElement.style.left = `${this.x}px`;
         }
@@ -138,7 +127,7 @@ export class SpaceShip extends Ship {
     }
 
     moveRight() {
-        if (this.x < window.innerWidth - this.htmlElement.clientWidth) {
+        if (this.x < window.innerWidth - objectImgSizes.spaceship / 2) {
             this.x += this.speedX;
             this.htmlElement.style.left = `${this.x}px`;
         }
@@ -211,38 +200,7 @@ export class SpaceShip extends Ship {
 
     // Bonuses collecting functions ================
 
-    collectSpeedUp(timeout) {
-
-        this.speedX = spaceShipSpeeds.fast;
-        let counter = parseFloat(timeout/1000);
-        
-        let counterInverval = setInterval(() => {
-            counter -= 0.1
-            domElements.engine.innerText = counter.toFixed(1);
-        }, 100);
-
-        setTimeout(() => {
-            this.speedX = spaceShipSpeeds.regular;
-            clearInterval(counterInverval);
-            domElements.engine.innerText = '0.0';
-        }, timeout);
-    }
-
-    collectHeart(livesCount) {
-        this.livesCount += livesCount;
-        domElements.hearts.innerText = `${this.livesCount}`;
-    }
-
-    collectTrippleMissile(shootsCount) {
-        this.trippleMissleCount += shootsCount;
-        domElements.tripleMissile.innerText = `${this.trippleMissleCount}`;
-    }
     
-    collectRocket(shootsCount) {
-        this.rocketCount += shootsCount;
-        domElements.rocket.innerText = `${this.rocketCount}`;
-    }
-
     collectBonus(bonus) {
 
         switch (bonus.className) {
@@ -260,4 +218,34 @@ export class SpaceShip extends Ship {
                 break;          
         }
     }
+    
+    collectSpeedUp(timeout) {
+
+        this.speedX = spaceShipSpeeds.fast;
+        let counter = parseFloat(timeout/1000);
+        
+        let counterInverval = setInterval(() => {
+            counter -= 0.1
+            domElements.engine.innerText = counter.toFixed(1);
+        }, 100);
+
+        setTimeout(() => {
+            this.speedX = spaceShipSpeeds.regular;
+            clearInterval(counterInverval);
+            domElements.engine.innerText = '0.0';
+        }, timeout);
+    }
+    
+    collectHeart(livesCount) {
+        this.livesCount += livesCount;
+    }
+
+    collectTrippleMissile(shootsCount) {
+        this.trippleMissleCount += shootsCount;
+    }
+    
+    collectRocket(shootsCount) {
+        this.rocketCount += shootsCount;
+    }
+
 }

@@ -43,13 +43,15 @@ export const domElements = {
     newGameButton: document.querySelector('[data-new-game-button]'),
     modal: document.querySelector('[data-modal]'),
     endScore: document.querySelector('[data-end-score]'),
+    
     rocket: document.querySelector('[data-rocket]'),
-    rocketImg: document.querySelector('[data-rocket-img]'),
     tripleMissile: document.querySelector('[data-triple-missile]'),
-    tripleMissileImg: document.querySelector('[data-triple-missile-img]'),
     hearts: document.querySelector('[data-heart]'),
     engine: document.querySelector('[data-engine]'),
-    scores: document.querySelector('[data-scores]')
+    scores: document.querySelector('[data-scores]'),
+    
+    rocketImg: document.querySelector('[data-rocket-img]'),
+    tripleMissileImg: document.querySelector('[data-triple-missile-img]'),
 }
 
 // GENERATORS INTERVALS
