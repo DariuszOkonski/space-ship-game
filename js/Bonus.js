@@ -1,9 +1,9 @@
-import { domElements, bonusSpeed, convertHtmlClassNameToPropertyName } from "./utilities.js";
+import { domElements, bonusSpeed, convertHtmlClassNameToPropertyName, hitBoxCorrections } from "./utilities.js";
 
 export class Bonus {
     constructor(className, bonusCount, speedY) {
         this.x = this.randomTopPosition();
-        this.y = window.innerHeight - 100;
+        this.y = window.innerHeight;
         this.className = className;
         this.bonusCount = bonusCount;
         this.intervalMovement = null;
@@ -41,11 +41,24 @@ export class Bonus {
             this.htmlElement.style.bottom = `${this.y}px`;
 
             if(this.y < 0) {
-                clearInterval(this.intervalMovement);
-                this.htmlElement.remove();
-                this.htmlElement = null;
+                this.remove()
             }
 
         }, 50);
+    }
+
+    remove() {
+        clearInterval(this.intervalMovement);
+        this.htmlElement.remove()
+        this.htmlElement = null;
+    }
+
+    getHitBox() {
+        // let hitboxToleranceCorrection = this.x * 0.02;
+        return {
+            leftSide: this.x + hitBoxCorrections['bonus'].x, 
+            rightSide: this.x + this.htmlElement.clientWidth - hitBoxCorrections['bonus'].x,
+            top: this.y + hitBoxCorrections['bonus'].y
+        }
     }
 }

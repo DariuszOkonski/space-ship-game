@@ -22,6 +22,7 @@ export const htmlClasses = {
     bonusEngine: "bonus-engine",
     bonusHeart: "bonus-heart",
     bonusMissile: "bonus-missile",
+    bonusThree: "bonus-three"
 }
 
 export const domElements = {
@@ -47,18 +48,18 @@ export const bonusSpeed = {
 }
 
 export const spaceShipSpeeds = {
-    regular: 5, 
+    regular: 8, 
     fast: 20
 };
 
 export const enemiesSpeed = {
     falcon: 2,
-    hawk: 6,
+    hawk: 4,
     destroyer: 1,
 }
 
 export const shipsLivesCount = {
-    spaceship: 2,
+    spaceship: 3,
     falcon: 1,
     hawk: 3,
     destroyer: 7
@@ -83,7 +84,8 @@ export const hitBoxCorrections = {
     missile: {x: 15, y: 10},
     missileRed: {x: 15, y: 10},
     missileRocket: {x: 30, y: 5},
-    spaceship: {x:4, y: 96}
+    spaceship: {x:4, y: 96},
+    bonus: {x: 15, y: 15}
 }
 
 export function convertHtmlClassNameToPropertyName(htmlClassString) {

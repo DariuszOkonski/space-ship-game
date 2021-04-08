@@ -18,6 +18,7 @@ class Controller {
     intervalEnemiesHitBottom = null; //Remember to clear interval
     intervalEnemiesGenerator = null;
     intervalBonusGenerator = null;
+    intervalBonusCollision = null;
 
     constructor() {
         this.setGame();
@@ -29,8 +30,9 @@ class Controller {
         this.checkEnemyHit();   
         this.missileCleaningLoop();
         this.bonusGenerator();
-        // this.enemyGenerator();
-        // this.enemiesCleaningLoop();
+        this.enemyGenerator();
+        this.enemiesCleaningLoop();
+        this.checkBonusShipCollision()
         
     }    
 
@@ -41,6 +43,7 @@ class Controller {
         clearInterval(this.intervalSpaceShipHit);
         clearInterval(this.intervalEnemiesHitBottom);
         clearInterval(this.intervalBonusGenerator);
+        clearInterval(this.intervalBonusCollision);
         
         this.scores = 0;
         const positionX = window.innerWidth / 2;
@@ -54,25 +57,35 @@ class Controller {
 
             let bonus = null;
             if(randomBonus < 0.25) {
-                bonus = new Bonus('bonus-heart', 1)
+                bonus = new Bonus('bonus-heart', 2)
             } else if (randomBonus < 0.5) {
-                bonus = new Bonus('bonus-engine', 5000)
+                bonus = new Bonus('bonus-engine', 12000)
             } else if (randomBonus < 0.75) {
-                bonus = new Bonus('bonus-missile', 3)
+                bonus = new Bonus('bonus-missile', 5)
             } else {
-                bonus = new Bonus('bonus-three', 10)
+                bonus = new Bonus('bonus-three', 15)
             }
 
             this.bonuses.push(bonus);
-            
-            this.bonuses.forEach((bonus, index, bonusArr) => {            
-                
+        }, 20000);
+    }
+
+    checkBonusShipCollision() {
+        this.intervalBonusCollision = setInterval(() => {
+            this.bonuses.forEach((bonus, index, bonusArr) => {
+                // remove bonus when below screen
                 if(bonus.htmlElement == null) {
                     bonusArr.splice(index, 1);
+                    // continue;
+                } else if(this.isObjectInHitBox(bonus.getHitBox(), this.spaceship.getHitBox(), true)) {                   
+
+                    this.spaceship.collectBonus(bonus);                    
+                    bonusArr.splice(index, 1);         
+                    bonus.remove();           
                 }
             })
 
-        }, 2000);
+        }, 20);   
     }
 
     checkEnemyHit() {
@@ -83,7 +96,7 @@ class Controller {
                 this.enemies.forEach((enemy, enemyIndex, enemyArr) => {
                     const enemyHitBox = enemy.getHitBox();
                     
-                    if (this.isMissileInHitBox(missileHitBox, enemyHitBox)) {
+                    if (this.isObjectInHitBox(missileHitBox, enemyHitBox)) {
                         
                         this.processHittingOpponentShip(missile, missileArr, missileIndex, enemy);
                         this.updateScores(missile.damage);
@@ -120,7 +133,7 @@ class Controller {
                     const spaceShipHitBox = this.spaceship.getHitBox();
                     const enemyMissileHitBox = missile.getHitBox();
                     
-                    if (this.isMissileInHitBox(enemyMissileHitBox, spaceShipHitBox, true)) {
+                    if (this.isObjectInHitBox(enemyMissileHitBox, spaceShipHitBox, true)) {
                         this.processHittingOpponentShip(missile, arr, index, this.spaceship);
                         this.displayPlayersLiveLossAnimation();
 
@@ -184,20 +197,20 @@ class Controller {
         missileArr.splice(missileIndex, 1)                            
     }
 
-    isMissileInHitBox(missileHitBox, shipHitBox, isEnemyShooting=false) {
-        let missileInShipHitBox = null;
+    isObjectInHitBox(movingObjectHitBox, shipHitBox, isEnemyShooting=false) {
+        let objectInShipHitBox = null;
         if (!isEnemyShooting) {
-            missileInShipHitBox = 
-                    (missileHitBox.top >= shipHitBox.frontSide) && 
-                    (missileHitBox.rightSide >= shipHitBox.leftSide) && 
-                    (missileHitBox.leftSide <= shipHitBox.rightSide)
+            objectInShipHitBox = 
+                    (movingObjectHitBox.top >= shipHitBox.frontSide) && 
+                    (movingObjectHitBox.rightSide >= shipHitBox.leftSide) && 
+                    (movingObjectHitBox.leftSide <= shipHitBox.rightSide)
         } else {
-            missileInShipHitBox = 
-                    (missileHitBox.top <= shipHitBox.frontSide) && 
-                    (missileHitBox.rightSide >= shipHitBox.leftSide) && 
-                    (missileHitBox.leftSide <= shipHitBox.rightSide)
+            objectInShipHitBox = 
+                    (movingObjectHitBox.top <= shipHitBox.frontSide) && 
+                    (movingObjectHitBox.rightSide >= shipHitBox.leftSide) && 
+                    (movingObjectHitBox.leftSide <= shipHitBox.rightSide)
         }
-        return missileInShipHitBox
+        return objectInShipHitBox
     }
    
     updateScores(damage) {
@@ -205,9 +218,7 @@ class Controller {
         domElements.scores.innerText = `Scores: ${this.scores}`;
     }
 
-    checkSpaceShipHit() {
-
-    }
+   
    
 
     enemyGenerator() {
@@ -216,12 +227,12 @@ class Controller {
         this.intervalEnemiesGenerator = setInterval(() => {
             let drawnNumber = Math.random();
          
-            if (drawnNumber < 0.35) {
+            if (drawnNumber < 0.45) {
                 let drawnShipX = Math.floor(Math.random() * window.innerWidth) - 32; 
                 const falcon = new Falcon(drawnShipX, (window.innerHeight - 100));
                     this.enemies.push(falcon)
             }
-            else if (drawnNumber < 0.7){
+            else if (drawnNumber < 0.8){
                 let drawnShipX = Math.floor(Math.random() * window.innerWidth) - 48; 
                 const hawk = new Hawk(drawnShipX, (window.innerHeight - 100));
                     this.enemies.push(hawk)
@@ -232,7 +243,7 @@ class Controller {
                     this.enemies.push(destroyer)
             }
            
-        }, 2000);
+        }, 3000);
     }
 
 

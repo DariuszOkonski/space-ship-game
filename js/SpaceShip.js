@@ -5,8 +5,8 @@ import {domElements, htmlClasses, spaceShipSpeeds, shipsLivesCount, missileDamag
 export class SpaceShip extends Ship {
     missiles = [];
     speedX = spaceShipSpeeds.regular;
-    rocketCount = 25;
-    trippleMissleCount = 30;
+    rocketCount = 5;
+    trippleMissleCount = 10;
     speedUpCounter = 0;
     htmlElement = null;
     movingLeft = false;
@@ -106,11 +106,6 @@ export class SpaceShip extends Ship {
                     console.log('triple shot');
                 }
                 break;
-
-            case 40:
-                // ARROW DOWN key - temporary testing key
-                this.collectSpeedUp(5000);
-                break;
         }
     }
 
@@ -172,7 +167,7 @@ export class SpaceShip extends Ship {
         setTimeout(() => {
             domElements.rocketImg.src = imagesURLs.bonusRocketReady;
             this.rocketCannonOverheated = false;
-        }, 3000);
+        }, 1500);
     }
 
 
@@ -220,6 +215,39 @@ export class SpaceShip extends Ship {
             clearInterval(counterInverval);
             domElements.engine.innerText = '0.0';
         }, timeout);
+    }
+
+    collectHeart(livesCount) {
+        this.livesCount += livesCount;
+        domElements.hearts.innerText = `${this.livesCount}`;
+    }
+
+    collectTrippleMissile(shootsCount) {
+        this.trippleMissleCount += shootsCount;
+        domElements.tripleMissile.innerText = `${this.trippleMissleCount}`;
+    }
+    
+    collectRocket(shootsCount) {
+        this.rocketCount += shootsCount;
+        domElements.rocket.innerText = `${this.rocketCount}`;
+    }
+
+    collectBonus(bonus) {
+
+        switch (bonus.className) {
+            case htmlClasses.bonusEngine:
+                this.collectSpeedUp(bonus.bonusCount);
+                break;
+            case htmlClasses.bonusHeart:
+                this.collectHeart(bonus.bonusCount);                
+                break;
+            case htmlClasses.bonusMissile:
+                this.collectRocket(bonus.bonusCount);
+                break;
+            case htmlClasses.bonusThree:
+                this.collectTrippleMissile(bonus.bonusCount);
+                break;          
+        }
     }
 
     explode() {
