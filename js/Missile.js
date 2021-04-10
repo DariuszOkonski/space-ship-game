@@ -77,7 +77,7 @@ export class Missile {
     remove() {
         clearInterval(this.intrevalIndex);
         this.htmlElement.remove()
-        this.htmlElement = null;
+        // this.htmlElement = null;
     }
 
     explode() {

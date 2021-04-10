@@ -51,6 +51,6 @@ export class Ship {
        
         setTimeout(() => {
             this.htmlElement.remove();
-        }, 1000);
+        }, 1500);
     }
 }

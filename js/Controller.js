@@ -128,7 +128,7 @@ class Controller {
                 } else if(this.isObjectInHitBox(bonus.getHitBox(), this.spaceship.getHitBox(), true)) {                   
 
                     this.spaceship.collectBonus(bonus);
-                    this.updateBonusCount(bonus.className);              
+                    this.updateBonusCountsInHtml(bonus.className);              
                     bonusArr.splice(index, 1);         
                     bonus.remove();           
                 }
@@ -138,9 +138,13 @@ class Controller {
 
     missileCleaningLoop() {
         this.intervalMissilesCleaner = setInterval(() => {
+        try {
             this.checkSpaceshipsMissiles();
             this.checkEnemiesMissiles();
-        }, 200);
+        } catch {
+            console.log("Catched type error")
+        }
+        }, 100);
     }
 
     checkSpaceshipsMissiles() {
@@ -154,7 +158,7 @@ class Controller {
 
     checkEnemiesMissiles() {
         this.enemies.forEach(enemy => {
-            if (enemy.shootingUnit && this.spaceship) {
+            if (enemy.shootingUnit && this.spaceship.livesCount != 0) {
                 enemy.missiles.forEach((missile, index, arr) => {               
                     
                     if (this.isObjectInHitBox(missile.getHitBox(), this.spaceship.getHitBox(), true)) {
@@ -230,7 +234,7 @@ class Controller {
         domElements.scores.innerText = `Scores: ${this.scores}`;
     }
 
-    updateBonusCount(bonusClassName) {
+    updateBonusCountsInHtml(bonusClassName) {
         switch (bonusClassName) {
             case htmlClasses.bonusHeart:
                 domElements.hearts.innerText = `${this.spaceship.livesCount}`;
