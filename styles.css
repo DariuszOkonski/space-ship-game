@@ -21,6 +21,11 @@ body {
     overflow: hidden;
 }
 
+#additional-weapon {
+    font-size: 16px;
+    text-transform: capitalize;
+}
+
 .container {
     position: relative;
     top: 0;
