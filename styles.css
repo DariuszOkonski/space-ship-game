@@ -21,7 +21,7 @@ body {
     overflow: hidden;
 }
 
-#additional-weapon {
+.additional-weapon {
     font-size: 16px;
     text-transform: capitalize;
 }
