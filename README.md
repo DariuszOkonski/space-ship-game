@@ -1,9 +1,9 @@
-#Moves 
-left move: "<-" left arrow
-right move: "->" right arrow
-single shoot: "space"
-triple shoot: "Q"
-missile: "W"
+# Moves 
+- left move: "<-" left arrow
+- right move: "->" right arrow
+- single shoot: "space"
+- triple shoot: "Q"
+- missile: "W"
 
 # RULES
 
