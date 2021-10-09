@@ -1,4 +1,6 @@
 # Moves 
+Application is hosted on heroku, so it can take few seconds to start
+https://spaceships.herokuapp.com/
 - left move: "<-" left arrow
 - right move: "->" right arrow
 - single shoot: "space"
