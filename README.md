@@ -1,3 +1,5 @@
+![image](main.png)
+
 # Moves 
 Application is hosted on heroku, so it can take few seconds to start
 https://spaceships.herokuapp.com/
