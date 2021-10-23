@@ -3,7 +3,8 @@
 Retro Spaceship game, try to destroy all oncomming enemies.
 
 ## Authors
-- Dariusz Okonski, Daniel Wator
+- Dariusz Okonski
+- Daniel Wator
 
 # Moves 
 Application is hosted on heroku, so it can take few seconds to start
