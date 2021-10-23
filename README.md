@@ -6,7 +6,11 @@ Retro Spaceship game, try to destroy all oncomming enemies.
 - Dariusz Okonski
 - Daniel Wator
 
-# Moves 
+## Technologies
+- HTML/CSS
+- JavaScript
+
+### Moves 
 Application is hosted on heroku, so it can take few seconds to start
 https://spaceships.herokuapp.com/
 - left move: "<-" left arrow
