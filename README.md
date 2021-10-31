@@ -1,6 +1,6 @@
 ![image](main.png)
 # Spaceship
-Retro Spaceship game, try to destroy all oncomming enemies.
+Retro Spaceship game, try to destroy all oncoming enemies.
 
 ## Authors
 - Dariusz Okonski
